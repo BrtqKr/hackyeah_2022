@@ -1,8 +1,6 @@
 {
-  "extends": "satya164",
-  "plugins": ["clean-timer"],
+  "extends": "eslint:recommended",
   "rules": {
-    "clean-timer/assign-timer-id": 2,
     "import/extensions": "off",
     "semi": "off",
     "quotes": [1, "single", { "allowTemplateLiterals": true }],
