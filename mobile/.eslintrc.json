@@ -21,6 +21,11 @@
     "quotes": [1, "single", { "allowTemplateLiterals": true }],
     "eslint-comments/no-unlimited-disable": "off",
     "no-unused-expressions": 1,
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "@typescript-eslint/no-unused-vars": [
+      1,
+      { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+    ],
+    "@typescript-eslint/no-empty-interface": "off"
   }
 }

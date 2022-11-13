@@ -1,4 +1,3 @@
-import { AppCoreStackParamList } from './paramLists/AppCoreStackParamList';
 import { RootStackParamList } from './navigators/RootNavigator/RootNavigator';
 
 declare global {
