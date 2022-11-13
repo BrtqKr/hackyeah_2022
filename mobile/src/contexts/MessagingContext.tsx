@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import { createContext, FC, useContext, useState } from 'react';
 import { Socket } from 'socket.io-client';
 
-const MessagingContext = React.createContext<{
+const MessagingContext = createContext<{
   socket: Socket | null;
 }>({
   socket: null,
 });
 
-export const MessagingProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+export const MessagingProvider: FC<{ children?: React.ReactNode }> = ({ children }) => {
   const [connected, setConnected] = useState<boolean>(false);
   const [socket, setSocket] = useState<Socket | null>(null);
 
