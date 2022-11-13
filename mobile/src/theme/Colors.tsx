@@ -1,0 +1,27 @@
+export const Colors = {
+  Primary1: '#473EDB',
+  Primary2: '#7069E3',
+  Primary3: '#9994EB',
+  Primary4: '#C2BFF3',
+  Primary5: '#D6D3F8',
+  Primary6: '#EEEDFC',
+  Secondary1: '#B5521C',
+  Secondary2: '#DD6727',
+  Secondary3: '#E48653',
+  Secondary4: '#EBA57F',
+  Secondary5: '#FFC6A7',
+  Secondary6: '#FFE6D8',
+  Black1: '#191919',
+  Black2: '#46464F',
+  Black3: '#707080',
+  Black4: '#9393A4',
+  Black5: '#C0C0D3',
+  Black6: '#DFDFEE',
+  White: '#FFFFFF',
+  Link: '#4286F4',
+  Error: '#F44336',
+  Success: '#67ae5b',
+  Transparent: '#00000000',
+};
+
+export type Color = keyof typeof Colors;
