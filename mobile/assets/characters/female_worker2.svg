@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="155.1001px" height="189.5px" viewBox="0 0 155.1001 189.5" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g id="female_worker2" transform="translate(0.5 0.5)">
+    <g id="female_worker1-2">
+      <path d="M98.7 141.5L76.7999 141.5L76.7999 188.5L98.7 188.5L98.7 141.5Z" id="Rectangle-4" fill="#8DA1FC" fill-rule="evenodd" stroke="none" />
+      <path d="M55.7002 140.5L77.6001 140.5L77.6001 188.5L55.7002 188.5L55.7002 140.5Z" id="Rectangle-4" fill="#7089F9" fill-rule="evenodd" stroke="none" />
+      <path d="M76.4998 158.4L78.5999 158.4L78.5999 160.5L76.4998 160.5L76.4998 158.4Z" id="Rectangle-2" fill="#000000" fill-rule="evenodd" stroke="none" />
+      <path d="M76.5999 162.5L78.7 162.5L78.7 164.6L76.5999 164.6L76.5999 162.5Z" id="Rectangle-3" fill="#000000" fill-rule="evenodd" stroke="none" />
+      <path d="M76.6001 166.6L78.7002 166.6L78.7002 168.7L76.6001 168.7L76.6001 166.6Z" id="Rectangle-2" fill="#000000" fill-rule="evenodd" stroke="none" />
+      <path d="M76.6001 170.7L78.7002 170.7L78.7002 172.8L76.6001 172.8L76.6001 170.7Z" id="Rectangle-2" fill="#000000" fill-rule="evenodd" stroke="none" />
+      <g id="hr">
+        <g id="HR">
+          <path d="M98.8997 141.5L148.9 167L154.1 188L83.8001 188L87.8001 167L98.8997 141.5Z" id="New-shape-5" fill="#2D2D2D" fill-rule="evenodd" stroke="#2D2D2D" stroke-width="1" />
+          <path d="M55.2002 141.5L5.20019 167L0 188L70.2998 188L66.2998 167L55.012 141.596L55.2002 141.5Z" id="New-shape-5" fill="#2D2D2D" fill-rule="evenodd" stroke="#2D2D2D" stroke-width="1" />
+          <g id="hr" transform="translate(14.800171 0)">
+            <g id="face" transform="translate(24.668701 18.932755)">
+              <g id="Head">
+                <path d="M37.2093 0L0 26.7829L8.99379 95.5872L37.2093 116.367L37.2093 55.6699L37.2093 0Z" id="New-shape-17-Copy" fill="#ECC17E" fill-rule="evenodd" stroke="#ECC17E" stroke-width="1" />
+                <g id="face_half" transform="matrix(-1 0 0 1 75.4093 0)">
+                  <path d="M37.2093 0L0 26.7829L8.99379 95.5872L37.2093 116.367L37.2093 0Z" id="New-shape-17-Copy" fill="#F2C785" fill-rule="evenodd" stroke="#F2C785" stroke-width="1" />
+                </g>
+                <path d="M26.037 57.26L28.537 57.26L28.537 72.9603L26.037 72.9603L26.037 57.26Z" id="eye-3" fill="#000000" fill-rule="evenodd" stroke="none" />
+                <path d="M47.4528 57.26L49.9528 57.26L49.9528 72.9603L47.4528 72.9603L47.4528 57.26Z" id="eye" fill="#000000" fill-rule="evenodd" stroke="none" />
+                <path d="M21.0494 48.6775L32.037 48.6775L30.6243 50.6775L29.4209 50.6775L21.0494 48.6775Z" id="New-shape-17" fill="#000000" fill-rule="evenodd" stroke="#000000" stroke-width="1" />
+                <path d="M17.9301 116.667L20.9301 116.667L20.9301 118.667L20.7079 118.667L17.9301 118.667L17.9301 116.667Z" id="Rectangle-8" fill="#D3D3D3" fill-opacity="0" fill-rule="evenodd" stroke="none" />
+                <path d="M15.3641 119.731L19.8388 117.5L20.7312 119.29L20.3998 119.455L16.2566 121.521L15.3641 119.731Z" id="Rectangle-9" fill="#D3D3D3" fill-opacity="0" fill-rule="evenodd" stroke="none" />
+              </g>
+            </g>
+            <path d="M61.85 18.0092L61.85 0L29.7649 10.159L8.59024 23.0887L0 138.5L40.1 155L24.0527 45.2538L61.85 18.0092Z" id="New-shape" fill="#000000" fill-rule="evenodd" stroke="#000000" stroke-width="1" />
+            <path d="M84.7001 141.5L73.7001 151.5L62.9 155L62.9001 135L78.7001 123.5L78.7001 138.5L84.7001 141.5Z" id="New-shape-19" fill="#ECC17E" fill-rule="evenodd" stroke="#ECC17E" stroke-width="1" />
+            <path d="M40.1 141.5L51.1 151.5L61.9 155L61.9001 135L46.1 123.5L46.1 138.5L40.1 141.5Z" id="New-shape-3" fill="#F2C785" fill-rule="evenodd" stroke="#F2C785" stroke-width="1" />
+          </g>
+        </g>
+      </g>
+      <path d="M77.6501 18.0092L77.6501 0L109.735 10.159L130.91 23.0887L139.5 138.5L99.4002 155L115.447 45.2538L77.6501 18.0092Z" id="New-shape" fill="#000000" fill-rule="evenodd" stroke="#000000" stroke-width="1" />
+    </g>
+    <path d="M92.9998 67.7L82.0098 67.7L83.4228 69.7L84.6265 69.7L92.9998 67.7Z" id="New-shape-17" fill="#000000" fill-rule="evenodd" stroke="#000000" stroke-width="1" />
+  </g>
+</svg>

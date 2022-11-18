@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="446.5193px" height="187.62305px" viewBox="0 0 446.5193 187.62305" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="369.39737" y1="-82" x2="212.19249" y2="211.62302" id="gradient_1">
+      <stop offset="0%" stop-color="#F0F747" />
+      <stop offset="100%" stop-color="#E8BD00" />
+    </linearGradient>
+  </defs>
+  <g id="Ellipse-3-Difference-2">
+    <path d="M445.851 84.8386C438.983 51.0761 387.86 0 238.848 0C89.8346 0 -2.40923 49.0191 0.0478979 92.623C2.50502 136.227 47.5907 182.389 228.056 187.382C408.521 192.374 452.718 118.601 445.851 84.8386ZM237.149 24.5077C119.031 24.5077 36.897 64.732 36.2275 93.8146C35.558 122.897 104.51 159.545 222.627 159.545C340.744 159.545 414.725 118.868 410.99 93.8146C407.254 68.7609 355.266 24.5077 237.149 24.5077Z" id="Ellipse-3-Difference" fill="url(#gradient_1)" fill-rule="evenodd" stroke="none" />
+  </g>
+</svg>
