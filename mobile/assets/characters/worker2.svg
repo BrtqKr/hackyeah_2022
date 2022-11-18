@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="182.79993px" height="189.01398px" viewBox="0 0 182.79993 189.01398" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g id="worker2" transform="translate(0.5 0.5)">
+    <g id="worker1">
+      <g id="worker1" transform="translate(0 0.5)">
+        <g id="neck" transform="translate(68 102.117035)">
+          <path d="M44.55 0L44.55 12.2098L22.5 16.7081L22.5 5.78358L44.55 0Z" id="New-shape-2" fill="#74584B" fill-rule="evenodd" stroke="#74584B" stroke-width="1" />
+          <path d="M0 0L0 12.2098L22.05 16.7081L22.05 5.78358L0 0Z" id="New-shape-3" fill="#886656" fill-rule="evenodd" stroke="#886656" stroke-width="1" />
+        </g>
+        <g id="Head" transform="translate(53.460205 0)">
+          <g id="face_half-3">
+            <path d="M37.04 0L12.5405 5.97324L0 24.9838L0 63.3335L12.5405 101.221L37.04 110L37.04 0Z" id="New-shape-17" fill="#74584B" fill-rule="evenodd" stroke="#74584B" stroke-width="1" />
+            <path d="M37.8 0L62.2994 5.97324L74.84 24.9838L74.84 63.3335L62.2995 101.221L37.8 110L37.8 0Z" id="New-shape-17" fill="#886656" fill-rule="evenodd" stroke="#886656" stroke-width="1" />
+          </g>
+          <path d="M51.5398 54.8191L55.5398 54.8191L55.5398 66.7655L51.5398 66.7655L51.5398 54.8191Z" id="eye" fill="#000000" fill-rule="evenodd" stroke="none" />
+          <path d="M6.33645 46.3454L28.9957 48.5312L27.817 49.9513L11.9213 50.9743L5.87887 50.3914L6.33645 46.3454Z" id="New-shape-17" fill="#000000" fill-rule="evenodd" stroke="#000000" stroke-width="1" />
+        </g>
+        <path d="M119.465 46.361L96.8023 48.7629L97.9785 50.2503L113.872 51.2524L119.916 50.6119L119.465 46.361Z" id="New-shape-4" fill="#000000" fill-rule="evenodd" stroke="#000000" stroke-width="1" />
+        <g id="torso" transform="translate(0 110.43515)">
+          <path d="M113.2 0L110.502 36.729L104 76.5789L90.7113 76.5789L90.7113 6.03349L113.2 0Z" id="New-shape-2" fill="#EEC586" fill-rule="evenodd" stroke="#EEC586" stroke-width="1" />
+          <path d="M90 76.5904L90 49.3119L90 37.6291L97.1555 37.6291L104 76.5904L90 76.5904Z" id="New-shape-5" fill="#A242C8" fill-rule="evenodd" stroke="#A242C8" stroke-width="1" />
+          <path d="M119 54.0359L140 54.0359L140 57.7359L119 57.7359L119 54.0359Z" id="Rectangle" fill="#F1F1F1" fill-rule="evenodd" stroke="none" />
+          <path d="M104.311 26.4904C104.311 26.4904 90.4999 26.4904 90.4999 26.4904L90.4999 37.6292L97.1555 37.6292C97.1555 37.6292 104.311 26.4904 104.311 26.4904Z" id="New-shape-4" fill="#7A2F98" fill-rule="evenodd" stroke="#7A2F98" stroke-width="1" />
+          <path d="M68 0.0358887L70.6397 36.7649L76.9999 76.6148L89.9999 76.6148L89.9999 6.06938L68 0.0358887Z" id="New-shape-2" fill="#FFDDA7" fill-rule="evenodd" stroke="#FFDDA7" stroke-width="1" />
+          <path d="M90 77.0788L90 38.0932L83 38.0932L75 76.6147L90 76.6147" id="New-shape-6" fill="#7A2F98" fill-rule="evenodd" stroke="#7A2F98" stroke-width="1" />
+          <path d="M76.5939 76.6148L67 0.0358887L6.58458 23.4365L0 76.6148L77 76.6148L0 76.6148L76.5939 76.6148Z" id="New-shape-6" fill="#F1F1F1" fill-rule="evenodd" stroke="#F1F1F1" stroke-width="1" />
+          <path d="M76 26.4904C76 26.4904 90 26.4904 90 26.4904L90 37.6292L83 37.6292C83 37.6292 76 26.4904 76 26.4904Z" id="New-shape-5" fill="#A242C8" fill-rule="evenodd" stroke="#A242C8" stroke-width="1" />
+          <path d="M104.51 76.6148L114 0.0358887L175.155 23.4365L181.8 76.6148L104.513 76.6148L181.8 76.6148L104.51 76.6148Z" id="New-shape" fill="#D8D8D8" fill-rule="evenodd" stroke="#D8D8D8" stroke-width="1" />
+          <path d="M90 6.09998L70.5 33.4827L68 0.0664978L90 6.09998Z" id="New-shape-3" fill="#EEC586" fill-rule="evenodd" stroke="#EEC586" stroke-width="1" />
+        </g>
+        <path d="M90.5 116.505L111.5 144.816L113 110.471L90.5 116.505Z" id="New-shape-3" fill="#FFDDA7" fill-rule="evenodd" stroke="#FFDDA7" stroke-width="1" />
+      </g>
+      <path d="M128.5 56L124.445 40L121.404 30L105.185 20.5L91.5 20.5L91.5 20.5L91.5 0L115.829 5.5L128.5 24.5L128.5 56Z" id="New-shape-2" fill="#000000" fill-rule="evenodd" stroke="#000000" stroke-width="1" />
+      <path d="M53 56L57 40L60 30L76 20.5L89.5 20.5L90.8 20.5L90.8 0.0140076L65.5 5.5L53 24.5L53 56Z" id="New-shape" fill="#000000" fill-rule="evenodd" stroke="#000000" stroke-width="1" />
+      <path d="M71 56L75 56L75 68L71 68L71 56Z" id="eye" fill="#000000" fill-rule="evenodd" stroke="none" />
+    </g>
+  </g>
+</svg>
