@@ -1,4 +1,4 @@
-package pl.hackyeah2022.czumpers.stonks.server
+package io.czumpers
 
 import java.util.*
 
