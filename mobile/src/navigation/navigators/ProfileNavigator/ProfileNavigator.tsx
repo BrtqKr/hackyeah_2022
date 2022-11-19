@@ -2,7 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Profile } from './Profile';
 
 export type ProfileStackParamList = {
-  ProfileRoute: undefined;
+  Profile: undefined;
 };
 
 const ProfileNavigator = () => {
@@ -10,7 +10,7 @@ const ProfileNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="ProfileRoute" component={Profile} />
+      <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
 };

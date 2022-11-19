@@ -1,21 +1,21 @@
 export interface LoginResponse {
-    status: string;
-    accessToken: string;
+  status: string;
+  jwt: string;
 }
 
 export interface LoginInput {
-    email: string;
-    password: string;
+  identifier: string;
+  password: string;
 }
 
 export interface User {
-    name: string;
-    email: string;
+  name: string;
+  email: string;
 }
 
 export interface UserResponse {
-    status: string;
-    data: {
-        user: User
-    }
+  status: string;
+  data: {
+    user: User;
+  };
 }
