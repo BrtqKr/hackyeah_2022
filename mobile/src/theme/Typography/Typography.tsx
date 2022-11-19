@@ -2,6 +2,11 @@ import { TextStyle } from 'react-native';
 import { Colors } from '../Colors';
 import { fontSize } from './textProperties';
 
+const header: TextStyle = {
+  fontSize: fontSize.XXLarge,
+  color: Colors.Dark1,
+};
+
 const text1: TextStyle = {
   fontSize: fontSize.XLarge,
   color: Colors.Dark1,
@@ -23,6 +28,7 @@ const text4: TextStyle = {
 };
 
 export const Typography = {
+  header,
   text1,
   text2,
   text3,

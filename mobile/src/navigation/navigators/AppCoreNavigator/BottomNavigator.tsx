@@ -5,8 +5,8 @@ import { StyleSheet, Text } from 'react-native';
 import { Colors } from '../../../theme/Colors';
 import { sizeMap } from '../../../theme/Iconography';
 import { Typography } from '../../../theme/Typography/Typography';
+import ProfileNavigator from '../ProfileNavigator/ProfileNavigator';
 import FeedScreen from './FeedScreen';
-import ProfileScreen from './ProfileScreen';
 import TasksScreen from './TasksScreen';
 
 const TabIcon = ({
@@ -67,7 +67,7 @@ const BottomNavigator = () => {
       />
       <Tab.Screen
         name="ProfileRoute"
-        component={ProfileScreen}
+        component={ProfileNavigator}
         options={{
           tabBarLabel: ({ focused }) => <TabLabel label="Profile" focused={focused} />,
           tabBarIcon: ({ focused }) => <TabIcon icon="user" focused={focused} />,
