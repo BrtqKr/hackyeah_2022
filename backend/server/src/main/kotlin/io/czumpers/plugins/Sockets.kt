@@ -22,6 +22,8 @@ fun Application.configureSockets() {
         webSocket("/server") {
             println("Connected")
 
+            val frame = incoming.receive()
+            incoming.iterator()
             for (frame in incoming) {
                 frame as? Frame.Text ?: continue
 
