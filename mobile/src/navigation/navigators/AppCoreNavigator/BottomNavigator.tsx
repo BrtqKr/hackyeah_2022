@@ -6,7 +6,7 @@ import { Colors } from '../../../theme/Colors';
 import { sizeMap } from '../../../theme/Iconography';
 import { Typography } from '../../../theme/Typography/Typography';
 import ProfileNavigator from '../ProfileNavigator/ProfileNavigator';
-import FeedScreen from './FeedScreen';
+import FeedNavigator from './FeedNavigator/FeedNavigator';
 import TasksScreen from './TasksScreen';
 
 const TabIcon = ({
@@ -33,7 +33,7 @@ const TabLabel = ({ label, focused }: { label: string; focused: boolean }) => (
 );
 
 export type BottomNavigatorParamList = {
-  FeedRoute: undefined;
+  FeedNavigatorRoute: undefined;
   TasksRoute: undefined;
   ProfileRoute: undefined;
 };
@@ -46,12 +46,12 @@ const BottomNavigator = () => {
       screenOptions={{
         tabBarActiveTintColor: Colors.Primary1,
         tabBarStyle: { ...styles.navigatorContainer, ...styles.shadow },
-        headerShown: false,
+        headerShown: true,
       }}
     >
       <Tab.Screen
-        name="FeedRoute"
-        component={FeedScreen}
+        name="FeedNavigatorRoute"
+        component={FeedNavigator}
         options={{
           tabBarLabel: ({ focused }) => <TabLabel label="Feed" focused={focused} />,
           tabBarIcon: ({ focused }) => <TabIcon icon="compass" focused={focused} />,
