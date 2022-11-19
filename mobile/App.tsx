@@ -1,18 +1,17 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React from 'react';
+import { AuthProvider } from './src/auth/AuthProvider';
 import RootNavigator from './src/navigation/navigators/RootNavigator';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-const queryClient = new QueryClient();
+import { CustomQueryClientProvider } from './src/query/CustomQueryClientProvider';
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
-        <SafeAreaProvider>
+    <AuthProvider>
+      <CustomQueryClientProvider>
+        <NavigationContainer>
           <RootNavigator />
-        </SafeAreaProvider>
-      </NavigationContainer>
-    </QueryClientProvider>
+        </NavigationContainer>
+      </CustomQueryClientProvider>
+    </AuthProvider>
   );
 }
