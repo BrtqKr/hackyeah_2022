@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import { FeedTasksList } from '../../../components/feed';
-import ScreenWrapper from '../../../components/shared/ScreenWrapper';
+import { FeedTasksList } from '../../../../components/feed';
+import { ScreenWrapper } from '../../../../components/shared';
 
 const FeedScreen = () => {
   const { navigate } = useNavigation();
