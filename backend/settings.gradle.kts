@@ -1,2 +1,2 @@
 rootProject.name = "backend"
-include("server")
+include("server", "auth-server")
