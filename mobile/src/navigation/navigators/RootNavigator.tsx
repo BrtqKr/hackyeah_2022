@@ -1,4 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
+import { useAuthContext } from '../../auth/AuthProvider';
 import AppCoreNavigator from './AppCoreNavigator/AppCoreNavigator';
 import AuthNavigator from './AuthNavigator/AuthNavigator';
 
@@ -9,8 +10,7 @@ export type RootStackParamList = {
 
 const RootNavigator = () => {
   const Stack = createStackNavigator<RootStackParamList>();
-  // const { isAuthenticated } = useAuth();
-  const isAuthenticated = true;
+  const { isSignedIn } = useAuthContext();
 
   return (
     <Stack.Navigator
@@ -18,7 +18,7 @@ const RootNavigator = () => {
         headerShown: false,
       }}
     >
-      {isAuthenticated ? (
+      {isSignedIn ? (
         <Stack.Screen name="AppCoreRoute" component={AppCoreNavigator} />
       ) : (
         <Stack.Screen name="AuthRoute" component={AuthNavigator} />

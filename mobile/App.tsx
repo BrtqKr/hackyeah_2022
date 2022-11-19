@@ -6,12 +6,12 @@ import { CustomQueryClientProvider } from './src/query/CustomQueryClientProvider
 
 export default function App() {
   return (
-    <CustomQueryClientProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <CustomQueryClientProvider>
         <NavigationContainer>
           <RootNavigator />
         </NavigationContainer>
-      </AuthProvider>
-    </CustomQueryClientProvider>
+      </CustomQueryClientProvider>
+    </AuthProvider>
   );
 }
