@@ -1,7 +1,7 @@
-package io.mzlnk
+package io.czumpers
 
+import io.czumpers.plugins.*
 import io.ktor.server.application.*
-import io.mzlnk.plugins.*
 
 fun main(args: Array<String>): Unit =
     io.ktor.server.netty.EngineMain.main(args)

@@ -1,11 +1,11 @@
-package io.mzlnk.plugins
+package io.czumpers.plugins
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import io.czumpers.randomStats
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import io.ktor.websocket.*
-import io.mzlnk.randomStats
 import java.time.Duration
 
 fun Application.configureSockets() {
@@ -22,7 +22,7 @@ fun Application.configureSockets() {
         webSocket("/server") {
             println("Connected")
 
-            for(frame in incoming) {
+            for (frame in incoming) {
                 frame as? Frame.Text ?: continue
 
                 val text = frame.readText()
