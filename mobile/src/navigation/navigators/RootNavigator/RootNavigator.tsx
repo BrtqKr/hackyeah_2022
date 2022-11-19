@@ -7,6 +7,7 @@ export type RootStackParamList = {
   MenuRoute: undefined;
   LobbyRoute: undefined;
   GameRoute: undefined;
+  CardsRoute: undefined;
 };
 
 const RootNavigator = () => {
@@ -16,6 +17,7 @@ const RootNavigator = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="MenuRoute" component={MenuScreen} />
       <Stack.Screen name="LobbyRoute" component={LobbyScreen} />
+      <Stack.Screen name="CardsRoute" component={LobbyScreen} />
       <Stack.Screen name="GameRoute" component={GameNavigator} />
     </Stack.Navigator>
   );
