@@ -5,6 +5,7 @@ services:
     container_name:   stonks-db-postgres
     build: .
     ports:
-      - 2138:5432
+      - 2137:5432
     environment:
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: sa
+      POSTGRES_USER: sa
