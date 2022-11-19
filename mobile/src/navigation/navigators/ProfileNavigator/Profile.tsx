@@ -1,43 +1,38 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { View, Text } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Avatar, LineEntry } from '../../../components/shared';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
+import { Avatar, LineEntry, ScreenWrapper } from '../../../components/shared';
 import { fontSize } from '../../../theme/Typography/textProperties';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Colors } from '../../../theme/Colors';
+import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AppCoreStackParamList } from '../AppCoreNavigator/AppCoreNavigator';
+import { AnimatedStatistics } from '../../../components/profile';
+
+type Navigation = StackNavigationProp<AppCoreStackParamList>;
 
 export const Profile = () => {
+  const navigation = useNavigation<Navigation>();
+
   return (
-    <SafeAreaView style={{ backgroundColor: Colors.white }}>
+    <ScreenWrapper safeArea>
       <View style={styles.wrapper}>
-        <View style={styles.center}>
-          <Avatar size="big" name="Team Czumpers" />
-          <Text style={[styles.text]}>Team Czumpers</Text>
+        <LineEntry
+          title="Team Czumpers"
+          left={<Avatar size="small" name="Team Czumpers" />}
+          right={
+            <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+              <Feather name="settings" size={24} color={Colors.Secondary3} />
+            </TouchableOpacity>
+          }
+          description="Pronouns"
+        />
+        <View style={styles.statsWrapper}>
+          <AnimatedStatistics />
         </View>
-        <LineEntry
-          title="Zdjęcie profilowe"
-          topDivider
-          description="Zmień moje zdjęcie profilowe"
-          bottomDivider
-          onPress={() => console.log('Logout me')}
-        />
-        <LineEntry
-          title="Zaimki"
-          description="Ustaw swoje zaimki"
-          bottomDivider
-          onPress={() => console.log('Logout me')}
-        />
-        <LineEntry
-          title="Wyloguj"
-          description="Wyloguj mnie z aplikacji"
-          bottomDivider
-          right={<Feather name="log-out" size={24} color={Colors.Black1} />}
-          onPress={() => console.log('Logout me')}
-          variant="danger"
-        />
       </View>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };
 
@@ -54,5 +49,17 @@ const styles = StyleSheet.create({
     fontSize: fontSize.XXLarge,
     marginTop: 32,
     marginBottom: 32,
+  },
+  statsWrapper: {
+    width: '100%',
+    height: 180,
+    borderRadius: 24,
+    marginTop: 32,
+    overflow: 'hidden',
+  },
+  indicatorWrapper: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

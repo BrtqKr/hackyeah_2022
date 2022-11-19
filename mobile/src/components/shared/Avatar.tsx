@@ -3,6 +3,7 @@ import { StyleSheet, Text } from 'react-native';
 import { View } from 'react-native';
 import { Colors } from '../../theme/Colors';
 import { fontSize } from '../../theme/Typography/textProperties';
+import { Typography } from '../../theme/Typography/Typography';
 
 export type AvatarProps = {
   image?: string;
@@ -17,7 +18,9 @@ export const Avatar = ({ image, name, size = 'small' }: AvatarProps) => {
     .join('');
   return (
     <View style={[styles.wrapper, size == 'small' ? styles.small : styles.big]}>
-      <Text style={[size == 'small' ? styles.textSmall : styles.textBig]}>{initials}</Text>
+      <Text style={[size == 'small' ? Typography.text1 : styles.textBig, { color: Colors.White1 }]}>
+        {initials}
+      </Text>
     </View>
   );
 };
@@ -36,15 +39,11 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   small: {
-    width: 40,
-    height: 40,
-  },
-  textSmall: {
-    fontSize: fontSize.XSmall,
-    color: Colors.White,
+    width: 60,
+    height: 60,
   },
   textBig: {
     fontSize: fontSize.XXXLarge,
-    color: Colors.White,
+    color: Colors.White1,
   },
 });

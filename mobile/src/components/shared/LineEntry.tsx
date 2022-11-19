@@ -2,9 +2,11 @@ import React from 'react';
 import { Pressable, View, Text, StyleSheet } from 'react-native';
 import { Colors } from '../../theme/Colors';
 import { fontSize } from '../../theme/Typography/textProperties';
+import { Typography } from '../../theme/Typography/Typography';
 
 interface Props {
   right?: React.ReactElement;
+  left?: React.ReactElement;
   title: string;
   description?: string;
   topDivider?: boolean;
@@ -18,6 +20,7 @@ const LineEntryComponent = ({
   description,
   topDivider = false,
   bottomDivider = false,
+  left,
   right,
   onPress,
   variant = 'regular',
@@ -38,8 +41,13 @@ const LineEntryComponent = ({
             ]}
           >
             <View style={{ flexDirection: 'row' }}>
+              {left && <View style={styles.right}>{left}</View>}
               <View style={styles.main}>
-                <Text style={[styles.title, isDanger && styles.danger]}>{title}</Text>
+                <Text
+                  style={[Typography.text1, { color: Colors.Dark1 }, isDanger && styles.danger]}
+                >
+                  {title}
+                </Text>
                 {description && (
                   <Text style={[styles.description, isDanger && styles.danger]}>{description}</Text>
                 )}
@@ -57,15 +65,12 @@ const LineEntryComponent = ({
 export default LineEntryComponent;
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: fontSize.Large,
-  },
   description: {
     fontSize: fontSize.Small,
   },
   divider: {
     height: 1,
-    backgroundColor: Colors.Black5,
+    backgroundColor: Colors.Secondary3,
     marginVertical: 0,
   },
   main: {
@@ -79,6 +84,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   danger: {
-    color: Colors.Error,
+    color: Colors.Primary2,
   },
 });

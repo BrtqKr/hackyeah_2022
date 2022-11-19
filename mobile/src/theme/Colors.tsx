@@ -5,7 +5,7 @@ export const Colors = {
   Secondary1: '#4D5558',
   Secondary2: '#586166',
   Secondary3: '#787F85',
-  Dark1: '#0000',
+  Dark1: '#000',
   Dark2: '#313F46',
   White1: '#E5EBED',
   Success1: '#72C944',
@@ -16,6 +16,7 @@ export const Colors = {
   Blue3: '#98BEE6',
   Link: '#4286F4',
   Transparent: '#00000000',
+  gold1: '#FFD700',
 };
 
 export type Color = keyof typeof Colors;

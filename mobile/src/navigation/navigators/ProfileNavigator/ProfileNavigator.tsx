@@ -1,12 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { Profile } from './Profile';
 
-export type GameStackParamList = {
+export type ProfileStackParamList = {
   ProfileRoute: undefined;
 };
 
 const ProfileNavigator = () => {
-  const Stack = createStackNavigator<GameStackParamList>();
+  const Stack = createStackNavigator<ProfileStackParamList>();
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
