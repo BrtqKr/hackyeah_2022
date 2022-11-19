@@ -4,7 +4,7 @@ import CommentsScreen from './CommentsScreen';
 
 export type FeedNavigatorStackParamList = {
   FeedRoute: undefined;
-  CommentsRoute: {taskId: string};
+  CommentsRoute: { taskId: string };
 };
 
 const FeedNavigator = () => {
@@ -16,9 +16,8 @@ const FeedNavigator = () => {
         headerShown: false,
       }}
     >
-        <Stack.Screen name="CommentsRoute" component={CommentsScreen} />
+      <Stack.Screen name="CommentsRoute" component={CommentsScreen} />
       <Stack.Screen name="FeedRoute" component={FeedScreen} />
-
     </Stack.Navigator>
   );
 };
