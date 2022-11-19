@@ -36,6 +36,7 @@ export const Colors: { [key in ColorName]: `#${string}` } = {
   Blue3: '#98BEE6',
   Link: '#4286F4',
   Transparent: '#00000000',
+  gold1: '#FFD700',
 };
 
 export type Color = keyof typeof Colors;
