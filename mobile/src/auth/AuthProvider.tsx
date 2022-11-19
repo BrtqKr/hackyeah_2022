@@ -1,5 +1,5 @@
 import { setItemAsync, deleteItemAsync, getItemAsync } from 'expo-secure-store';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 export const JWT_TOKEN_KEY = 'JWT_TOKEN';
 
 export const setAuthToken = (token: string) => {
@@ -14,7 +14,7 @@ export const deleteAuthToken = () => {
   return deleteItemAsync(JWT_TOKEN_KEY);
 };
 
-export function useAuth() {
+function useAuth() {
   const [isSignedIn, setSignedIn] = useState<boolean>(false);
 
   const initialize = async () => {
@@ -50,3 +50,5 @@ export const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ childre
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
+
+export const useAuthContext = () => useContext(AuthContext);

@@ -1,12 +1,12 @@
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import React from 'react';
-import { useAuth } from '../auth/AuthProvider';
+import { useAuthContext } from '../auth/AuthProvider';
 
 export const CustomQueryClientProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { logout } = useAuth();
+  const { logout } = useAuthContext();
 
   const queryClient = new QueryClient({
     queryCache: new QueryCache({
