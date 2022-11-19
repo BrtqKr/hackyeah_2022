@@ -31,14 +31,16 @@ const LoginScreen = () => {
   const { login } = useAuthContext();
 
   const { mutate } = useMutation({
-    mutationFn: () => Promise.resolve({ accessToken: '' }),
-    onSuccess: (loginResponse) => login(loginResponse.accessToken),
+    mutationFn: loginUser,
+    onSuccess: (loginResponse) => {
+      login(loginResponse.jwt);
+    },
   });
 
   const { control, handleSubmit } = useForm<LoginInput>({
     mode: 'onBlur',
     defaultValues: {
-      email: '',
+      identifier: '',
       password: '',
     },
   });
@@ -54,7 +56,7 @@ const LoginScreen = () => {
               behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
               style={styles.content}
             >
-              <Text style={styles.title}>Witaj ponownier!</Text>
+              <Text style={styles.title}>Witaj ponownie!</Text>
 
               <SizedBox height={8} />
 
@@ -64,7 +66,7 @@ const LoginScreen = () => {
               <View style={styles.form}>
                 <Controller
                   control={control}
-                  name="email"
+                  name="identifier"
                   render={({ field: { onChange, onBlur, value } }) => (
                     <TextInput
                       placeholder="Email"
