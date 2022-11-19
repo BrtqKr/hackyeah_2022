@@ -11,7 +11,7 @@ const MenuScreen = () => {
     >
       <Text>MENU HEADER</Text>
       <View style={{ flex: 1, justifyContent: 'center' }}>
-        <Button onPress={() => navigate('LobbyRoute')} title="Play" />
+        <Button onPress={() => navigate('ProfileRoute')} title="Play" />
       </View>
     </ScreenWrapper>
   );
