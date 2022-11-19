@@ -11,8 +11,10 @@ export const authApi = configuredAxios.create({
 authApi.defaults.headers.common['Content-Type'] = 'application/json';
 
 export const loginUser = async (user: LoginInput) => {
-    const response = await authApi.post<LoginResponse>('/auth/login', user);
-    return response.data;
+    // const response = await authApi.post<LoginResponse>('/auth/login', user);
+    return {
+        accessToken: 'bToken'
+    }
 };
 
 export const refreshAccessToken = async () => {
