@@ -1,11 +1,9 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { Button, Text, View } from 'react-native';
+import { Text } from 'react-native';
 import ScreenWrapper from '../../../components/shared/ScreenWrapper';
 import { Card } from '../../../components/decisions';
 
 const DecisionsScreen = () => {
-  const { navigate } = useNavigation();
   return (
     <ScreenWrapper
       style={{ paddingHorizontal: 24, paddingVertical: 32, alignItems: 'center' }}
