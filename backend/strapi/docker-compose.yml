@@ -25,4 +25,4 @@ services:
       - ./.env:/opt/app/.env
       - ./public/uploads:/opt/app/public/uploads
     ports:
-      - '80:1337'
+      - '80:1338'

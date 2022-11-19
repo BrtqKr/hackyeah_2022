@@ -4,7 +4,7 @@
 
 ```ssh
 HOST=0.0.0.0
-PORT=1337
+PORT=1338
 APP_KEYS="toBeModified1,toBeModified2"
 API_TOKEN_SALT=tobemodified
 ADMIN_JWT_SECRET=tobemodified
