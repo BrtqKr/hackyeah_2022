@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import RootNavigator from './src/navigation/navigators/RootNavigator/RootNavigator';
+import RootNavigator from './src/navigation/navigators/RootNavigator';
 
 const queryClient = new QueryClient();
 
