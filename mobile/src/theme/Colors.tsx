@@ -1,11 +1,31 @@
-export const Colors = {
+export enum ColorName {
+  Primary1 = 'Primary1',
+  Primary2 = 'Primary2',
+  Primary3 = 'Primary3',
+  Secondary1 = 'Secondary1',
+  Secondary2 = 'Secondary2',
+  Secondary3 = 'Secondary3',
+  Dark1 = 'Dark1',
+  Dark2 = 'Dark2',
+  White1 = 'White1',
+  Success1 = 'Success1',
+  Success2 = 'Success2',
+  Success3 = 'Success3',
+  Blue1 = 'Blue1',
+  Blue2 = 'Blue2',
+  Blue3 = 'Blue3',
+  Link = 'Link',
+  Transparent = 'Transparent',
+}
+
+export const Colors: { [key in ColorName]: `#${string}` } = {
   Primary1: '#BD1F31',
   Primary2: '#CB1F33',
   Primary3: '#CE1D34',
   Secondary1: '#4D5558',
   Secondary2: '#586166',
   Secondary3: '#787F85',
-  Dark1: '#0000',
+  Dark1: '#000',
   Dark2: '#313F46',
   White1: '#E5EBED',
   Success1: '#72C944',
