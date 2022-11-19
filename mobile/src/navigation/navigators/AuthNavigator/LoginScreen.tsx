@@ -2,18 +2,17 @@ import { useMutation } from '@tanstack/react-query';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
-  Text,
-  TextInput,
-  View,
-  StyleSheet,
-  TouchableOpacity,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
   TouchableWithoutFeedback,
+  View,
 } from 'react-native';
-import { loginUser } from '../../../auth/api';
 import { useAuthContext } from '../../../auth/AuthProvider';
 import { LoginInput } from '../../../auth/types';
 import ScreenWrapper from '../../../components/shared/ScreenWrapper';
@@ -32,7 +31,7 @@ const LoginScreen = () => {
   const { login } = useAuthContext();
 
   const { mutate } = useMutation({
-    mutationFn: loginUser,
+    mutationFn: () => Promise.resolve({ accessToken: '' }),
     onSuccess: (loginResponse) => login(loginResponse.accessToken),
   });
 

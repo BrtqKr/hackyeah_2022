@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { Colors } from '../../theme/Colors';
+import { FeedTasksHeader } from './FeedTasksHeader';
 import { FeedTaskTile } from './FeedTaskTile';
 
 export const FeedTasksList = () => {
@@ -49,6 +50,7 @@ export const FeedTasksList = () => {
       data={FEED_TASKS}
       renderItem={({ item }) => <FeedTaskTile {...item} />}
       keyExtractor={(item) => item.id}
+      ListHeaderComponent={() => <FeedTasksHeader />}
       refreshControl={
         <RefreshControl
           refreshing={false}

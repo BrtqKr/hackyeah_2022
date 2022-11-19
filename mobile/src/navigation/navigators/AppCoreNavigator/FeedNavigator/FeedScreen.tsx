@@ -6,7 +6,7 @@ const FeedScreen = () => {
   const { navigate } = useNavigation();
 
   return (
-    <ScreenWrapper style={{ paddingHorizontal: 24, alignItems: 'center' }}>
+    <ScreenWrapper style={{ paddingHorizontal: 24 }}>
       <FeedTasksList />
     </ScreenWrapper>
   );
