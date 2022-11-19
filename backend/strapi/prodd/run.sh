@@ -5,4 +5,4 @@ docker rm --force strapi:latest
 docker image rm --force  strapi
 docker image rm --force  strapi:v1
 docker load -i strapi.tar
-docker run -p "80:1338" -d  --name strapi strapi:latest
+docker run -p "80:1337" -d  --name strapi strapi:latest
