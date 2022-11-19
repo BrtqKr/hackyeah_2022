@@ -1,4 +1,18 @@
-# 🚀 Getting started with Strapi
+# 🚀 STRAPI STONKS
+
+## create .env file in main folder in a format like:
+
+```ssh
+HOST=0.0.0.0
+PORT=1337
+APP_KEYS="toBeModified1,toBeModified2"
+API_TOKEN_SALT=tobemodified
+ADMIN_JWT_SECRET=tobemodified
+JWT_SECRET=tobemodified
+```
+
+
+
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.
 
