@@ -1,4 +1,5 @@
 import { setItemAsync, deleteItemAsync, getItemAsync } from 'expo-secure-store';
+import { UserWithId } from '../axios/types';
 import React, { useContext, useEffect, useState } from 'react';
 export const JWT_TOKEN_KEY = 'JWT_TOKEN';
 
@@ -16,6 +17,7 @@ export const deleteAuthToken = () => {
 
 function useAuth() {
   const [isSignedIn, setSignedIn] = useState<boolean>(false);
+  const [user, setUser] = useState<UserWithId>();
   const [initializing, setInitializing] = useState<boolean>(true);
 
   useEffect(() => {
@@ -30,8 +32,9 @@ function useAuth() {
     initialize();
   }, []);
 
-  const login = async (token: string) => {
+  const login = async (token: string, user: UserWithId) => {
     await setAuthToken(token);
+    setUser(user);
     setSignedIn(true);
   };
 
@@ -40,7 +43,7 @@ function useAuth() {
     setSignedIn(false);
   };
 
-  return { initializing, login, logout, isSignedIn };
+  return { initializing, login, logout, isSignedIn, user };
 }
 
 const AuthContext = React.createContext<ReturnType<typeof useAuth>>({
@@ -48,6 +51,7 @@ const AuthContext = React.createContext<ReturnType<typeof useAuth>>({
   login: (_) => Promise.resolve(),
   logout: () => Promise.resolve(),
   initializing: false,
+  user: { username: '', email: '', Name: null, Surname: null, id: 0 },
 });
 
 export const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
