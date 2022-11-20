@@ -1,7 +1,15 @@
 import axios from 'axios';
 import { getAuthToken } from '../auth/AuthProvider';
+import Constants from 'expo-constants';
 
-axios.interceptors.request.use(
+const axiosInstance = axios.create({
+  baseURL: Constants.expoConfig?.extra?.apiUrl,
+  headers: {
+    ['Content-Type']: 'application/json',
+  },
+});
+
+axiosInstance.interceptors.request.use(
   async (config) => {
     const authToken = await getAuthToken();
 
@@ -17,4 +25,4 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export const configuredAxios = axios;
+export const configuredAxios = axiosInstance;

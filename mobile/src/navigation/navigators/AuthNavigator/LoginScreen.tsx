@@ -5,7 +5,6 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -18,6 +17,9 @@ import { useAuthContext } from '../../../auth/AuthProvider';
 import { LoginInput } from '../../../auth/types';
 import ScreenWrapper from '../../../components/shared/ScreenWrapper';
 import { Colors } from '../../../theme/Colors';
+import LeafSvg from '../../../../svgs/Svg';
+import LogoSvg from '../../../../svgs/BgkSvg';
+import { Typography } from '../../../theme/Typography/Typography';
 
 interface SizedBoxProps {
   height?: number;
@@ -34,7 +36,7 @@ const LoginScreen = () => {
   const { mutate } = useMutation({
     mutationFn: loginUser,
     onSuccess: (loginResponse) => {
-      login(loginResponse.jwt);
+      login(loginResponse.jwt, loginResponse.user);
     },
   });
 
@@ -49,72 +51,85 @@ const LoginScreen = () => {
   const onSubmit = (data: LoginInput) => mutate(data);
 
   return (
-    <ScreenWrapper safeArea>
+    <ScreenWrapper safeArea style={{ paddingHorizontal: 24 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.root}>
-          <SafeAreaView style={styles.safeAreaView}>
-            <KeyboardAvoidingView
-              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-              style={styles.content}
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.content}
+          >
+            <View style={styles.logoWrapper}>
+              <View style={styles.logo}>
+                <LeafSvg />
+              </View>
+              <Text style={[Typography.text1, styles.logoWrapperText]}>Sustainify</Text>
+            </View>
+
+            <Text style={[Typography.text1, styles.logoWrapperText, { marginBottom: 8 }]}>
+              Hi there!
+            </Text>
+
+            <Text
+              style={[
+                Typography.text1,
+                { color: Colors.Secondary4, marginBottom: 16, fontSize: 20 },
+              ]}
             >
-              <Text style={styles.title}>Witaj ponownie!</Text>
+              Ready for a new challenge?
+            </Text>
 
-              <SizedBox height={8} />
-
-              <Text style={styles.subtitle}>Zaloguj się na swoje konto</Text>
-
-              <SizedBox height={32} />
-              <View style={styles.form}>
-                <Controller
-                  control={control}
-                  name="identifier"
-                  render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                      placeholder="Email"
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      keyboardType="email-address"
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      returnKeyType="next"
-                      style={styles.textInput}
-                      textContentType="username"
-                      value={value}
-                    />
-                  )}
-                />
+            <View style={styles.form}>
+              <Controller
+                control={control}
+                name="identifier"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    placeholder="Email"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType="email-address"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    returnKeyType="next"
+                    style={styles.textInput}
+                    textContentType="username"
+                    value={value}
+                    placeholderTextColor={Colors.Secondary3}
+                  />
+                )}
+              />
+            </View>
+            <View style={styles.form}>
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    placeholder="Password"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    onSubmitEditing={handleSubmit(onSubmit)}
+                    returnKeyType="done"
+                    secureTextEntry
+                    style={[styles.textInput, { marginBottom: 20 }]}
+                    textContentType="password"
+                    value={value}
+                    placeholderTextColor={Colors.Secondary3}
+                  />
+                )}
+              />
+            </View>
+            <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+              <View style={styles.button}>
+                <Text style={styles.buttonTitle}>Log in</Text>
               </View>
-              <SizedBox height={16} />
-              <View style={styles.form}>
-                <Controller
-                  control={control}
-                  name="password"
-                  render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                      placeholder="Hasło"
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      onSubmitEditing={handleSubmit(onSubmit)}
-                      returnKeyType="done"
-                      secureTextEntry
-                      style={styles.textInput}
-                      textContentType="password"
-                      value={value}
-                    />
-                  )}
-                />
-              </View>
-              <SizedBox height={16} />
-              <SizedBox height={16} />
-              <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-                <View style={styles.button}>
-                  <Text style={styles.buttonTitle}>Kontynuuj</Text>
-                </View>
-              </TouchableOpacity>
-            </KeyboardAvoidingView>
-          </SafeAreaView>
+            </TouchableOpacity>
+          </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>
+      <View style={{ alignSelf: 'flex-end', marginRight: 24 }}>
+        <LogoSvg />
+      </View>
     </ScreenWrapper>
   );
 };
@@ -123,9 +138,11 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: Colors.Primary1,
-    borderRadius: 8,
-    height: 48,
+    borderRadius: 26,
+    height: 52,
     justifyContent: 'center',
+    alignSelf: 'flex-end',
+    paddingHorizontal: 30,
   },
   buttonTitle: {
     color: Colors.White1,
@@ -138,21 +155,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 16,
     paddingVertical: 32,
+    paddingTop: 0,
   },
   forgotPasswordContainer: {
     alignItems: 'flex-end',
   },
   form: {
     alignItems: 'center',
-    backgroundColor: '#fca5a5',
-    borderRadius: 8,
+    borderRadius: 20,
     flexDirection: 'row',
     height: 48,
     color: Colors.Dark2,
     paddingHorizontal: 16,
+    borderWidth: 1,
+    borderColor: Colors.Secondary3,
+    marginBottom: 16,
   },
   root: {
-    backgroundColor: Colors.White1,
+    backgroundColor: '#FFF',
     flex: 1,
   },
   safeAreaView: {
@@ -177,6 +197,24 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
     lineHeight: 34,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.Primary1,
+    marginBottom: 8,
+  },
+  logoWrapperText: {
+    fontSize: 26,
+    color: Colors.Secondary3,
+  },
+  logoWrapper: {
+    alignSelf: 'center',
+    marginBottom: 100,
+    alignItems: 'center',
   },
 });
 

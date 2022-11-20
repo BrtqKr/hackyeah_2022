@@ -6,6 +6,7 @@ export enum ColorName {
   Secondary1 = 'Secondary1',
   Secondary2 = 'Secondary2',
   Secondary3 = 'Secondary3',
+  Secondary4 = 'Secondary4',
   Dark1 = 'Dark1',
   Dark2 = 'Dark2',
   Dark3 = 'Dark3',
@@ -22,13 +23,14 @@ export enum ColorName {
 }
 
 export const Colors: { [key in ColorName]: `#${string}` } = {
-  Primary1: '#BD1F31',
+  Primary1: '#843E3E',
   Primary2: '#CB1F33',
   Primary3: '#CE1D34',
   PrimaryDark: '#843E3E',
   Secondary1: '#4D5558',
   Secondary2: '#586166',
   Secondary3: '#787F85',
+  Secondary4: '#a4acb3',
   Dark1: '#000',
   Dark2: '#313F46',
   Dark3: '#121212',
