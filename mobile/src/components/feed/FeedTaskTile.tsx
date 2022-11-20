@@ -16,9 +16,37 @@ import { Colors } from '../../theme/Colors';
 import { radiusMap } from '../../theme/Constants';
 import { sizeMap } from '../../theme/Iconography';
 import { Typography } from '../../theme/Typography/Typography';
+import { Avatar } from '../shared';
 import BlurWrapper from '../shared/BlurWrapper';
 
 const IMAGE_RADIUS = radiusMap.XLarge - 12;
+
+const mockImages: MockImage[] = [
+  {
+    url: 'https://thispersondoesnotexist.com/image',
+    status: 'Jane Morgan',
+  },
+  {
+    url: 'https://i1.sndcdn.com/avatars-000529882611-ht5r1v-t500x500.jpg',
+    status: 'Patrick Bateman',
+  },
+  {
+    url: 'https://thispersondoesnotexist.com/image',
+    status: 'John Doe',
+  },
+  {
+    url: 'https://thispersondoesnotexist.com/image',
+    status: 'Stanley Brave',
+  },
+  {
+    url: 'https://thispersondoesnotexist.com/image',
+    status: 'Włodzimierz Biały',
+  },
+  {
+    url: 'https://thispersondoesnotexist.com/image',
+    status: 'Szaweł dobry człowiek',
+  },
+];
 
 export const FeedTaskTile = ({
   tileIndex,
@@ -59,23 +87,38 @@ export const FeedTaskTile = ({
     <Animated.View style={[styles.container, animatedRotation]}>
       <View style={{ paddingHorizontal: 10 }}>
         <View style={styles.container}>
+          <BlurWrapper
+            style={{
+              width: '100%',
+              height: 50,
+              backgroundColor: 'rgba(0, 0, 0, 0.4)',
+              position: 'absolute',
+              zIndex: 100,
+            }}
+          >
+            <View
+              style={{
+                position: 'absolute',
+                top: 8,
+                left: 12,
+                zIndex: 10,
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <Image
+                style={styles.avatar}
+                source={{
+                  uri: mockImages[tileIndex].url,
+                }}
+              />
+              <Text style={[Typography.text1, { color: Colors.White1 }]}>
+                {mockImages[tileIndex].status}
+              </Text>
+            </View>
+          </BlurWrapper>
           <View>
             <View style={{ overflow: 'hidden', borderRadius: IMAGE_RADIUS }}>
-              <View
-                style={{
-                  position: 'absolute',
-                  top: 8,
-                  left: 12,
-                  zIndex: 10,
-                }}
-              >
-                <Image
-                  style={styles.avatar}
-                  source={{
-                    uri: taskCompletion.users_permissions_user.data?.attributes.email ?? undefined,
-                  }}
-                />
-              </View>
               <Image
                 style={{ aspectRatio: 1, backgroundColor: Colors.Dark3 }}
                 source={{
@@ -169,7 +212,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     height: '30%',
-
     justifyContent: 'space-between',
   },
   userName: { fontWeight: 'bold', color: Colors.Dark1 },

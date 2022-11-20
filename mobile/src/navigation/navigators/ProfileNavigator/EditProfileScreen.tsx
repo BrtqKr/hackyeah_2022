@@ -2,8 +2,10 @@ import { StyleSheet } from 'react-native';
 import { LineEntry, ScreenWrapper } from '../../../components/shared';
 import { Feather } from '@expo/vector-icons';
 import { Colors } from '../../../theme/Colors';
+import { useAuthContext } from '../../../auth/AuthProvider';
 
 export const EditProfileScreen = () => {
+  const { logout } = useAuthContext();
   return (
     <ScreenWrapper style={styles.wrapper}>
       <LineEntry
@@ -19,7 +21,7 @@ export const EditProfileScreen = () => {
       <LineEntry
         title="Sign out"
         right={<Feather name="log-out" size={24} color={Colors.Secondary3} />}
-        onPress={() => console.log('Logout me')}
+        onPress={() => logout()}
         variant="danger"
       />
     </ScreenWrapper>
