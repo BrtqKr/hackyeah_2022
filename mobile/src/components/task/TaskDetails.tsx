@@ -3,7 +3,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
 import * as ImagePicker from 'expo-image-picker';
 import { ImagePickerResult } from 'expo-image-picker';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 import React, { ComponentPropsWithoutRef, useState } from 'react';
 import {
   Image,
@@ -61,7 +61,7 @@ const getStatus = (item: ArrayElement<ApiResponse<TasksWithMetadata>['data']>): 
   return 'inProgress';
 };
 
-export const TaskDetails = ({ taskId } : { taskId: number }) => {
+export const TaskDetails = ({ taskId }: { taskId: number }) => {
   const [image, setImage] = useState<string | undefined>(undefined);
   const { goBack } = useNavigation();
   const { top } = useSafeAreaInsets();
@@ -93,12 +93,11 @@ export const TaskDetails = ({ taskId } : { taskId: number }) => {
     }
   };
 
-  let formattedDate = ''
+  let formattedDate = '';
 
-  if(selectedTask?.attributes?.date_finished != null) {
-    const date = new Date(selectedTask?.attributes?.date_finished || '')
-     formattedDate =  format(date, 'do MMMM y')
-
+  if (selectedTask?.attributes?.date_finished != null) {
+    const date = new Date(selectedTask?.attributes?.date_finished || '');
+    formattedDate = format(date, 'do MMMM y');
   }
   if (!isLoading && !selectedTask) {
     return null;
@@ -198,9 +197,7 @@ export const TaskDetails = ({ taskId } : { taskId: number }) => {
                     }}
                   >
                     <Feather name="upload" size={60} color="#B5B5B5" />
-                    <Text style={{ color: '#B5B5B5', fontSize: 12, paddingTop: 6 }}>
-                      Dodaj zdjęcie
-                    </Text>
+                    <Text style={{ color: '#B5B5B5', fontSize: 12, paddingTop: 6 }}>Add photo</Text>
                   </View>
                 ) : null}
               </ImageBackground>
@@ -211,9 +208,7 @@ export const TaskDetails = ({ taskId } : { taskId: number }) => {
               onPress={addCompletedTask}
             >
               <View style={[styles.button, !image && { backgroundColor: Colors.Secondary3 }]}>
-                <Text style={[styles.buttonTitle, !image && { color: '#B5B5B5' }]}>
-                  Zatwierdź zadanie
-                </Text>
+                <Text style={[styles.buttonTitle, !image && { color: '#B5B5B5' }]}>fulfill</Text>
               </View>
             </TouchableOpacity>
           </View>
