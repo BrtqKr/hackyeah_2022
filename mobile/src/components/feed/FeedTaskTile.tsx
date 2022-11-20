@@ -10,17 +10,23 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { useAuthContext } from '../../auth/AuthProvider';
+import { TaskCompletion } from '../../axios/types';
 import { Colors } from '../../theme/Colors';
 import { radiusMap } from '../../theme/Constants';
 import { sizeMap } from '../../theme/Iconography';
 import { Typography } from '../../theme/Typography/Typography';
 import BlurWrapper from '../shared/BlurWrapper';
-import {TaskCompletion} from '../../axios/types';
-import {useAuthContext} from '../../auth/AuthProvider';
 
 const IMAGE_RADIUS = radiusMap.XLarge - 12;
 
-export const FeedTaskTile = ({ tileIndex, taskCompletion }: { tileIndex: number; taskCompletion: TaskCompletion }) => {
+export const FeedTaskTile = ({
+  tileIndex,
+  taskCompletion,
+}: {
+  tileIndex: number;
+  taskCompletion: TaskCompletion;
+}) => {
   const animationProgress = useSharedValue(1.7);
   const { user } = useAuthContext();
 
@@ -71,7 +77,7 @@ export const FeedTaskTile = ({ tileIndex, taskCompletion }: { tileIndex: number;
                 />
               </View>
               <Image
-                style={{ aspectRatio: 1 }}
+                style={{ aspectRatio: 1, backgroundColor: Colors.Dark3 }}
                 source={{
                   uri: 'http://188.68.236.47' + taskCompletion.media.data?.attributes.url,
                 }}
@@ -95,14 +101,20 @@ export const FeedTaskTile = ({ tileIndex, taskCompletion }: { tileIndex: number;
                     >
                       <TouchableOpacity onPress={() => {}}>
                         <FontAwesome
-                          name={taskCompletion.liked_by.data.some((el) => el.id == user?.id) ? 'heart': 'heart-o'}
+                          name={
+                            taskCompletion.liked_by.data.some((el) => el.id == user?.id)
+                              ? 'heart'
+                              : 'heart-o'
+                          }
                           size={sizeMap.Regular}
                           color={Colors.White1}
                           style={{ marginRight: 8 }}
                         />
                       </TouchableOpacity>
 
-                      <TouchableOpacity onPress={() => {}}>
+                      <TouchableOpacity
+                        onPress={() => navigate('CommentsRoute', { taskId: 'taskID' })}
+                      >
                         <Feather
                           name={'message-circle'}
                           size={sizeMap.Regular}
@@ -117,6 +129,9 @@ export const FeedTaskTile = ({ tileIndex, taskCompletion }: { tileIndex: number;
                     </Text>
                   </View>
                 </View>
+                <View
+                  style={[StyleSheet.absoluteFillObject, { backgroundColor: 'rgba(0,0,0,0.1)' }]}
+                />
               </BlurWrapper>
             </View>
           </View>

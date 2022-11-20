@@ -22,7 +22,7 @@ const TabLabel = ({ label, focused }: { label: string; focused: boolean }) => (
     style={[
       Typography.text3,
       {
-        color: focused ? Colors.Primary1 : Colors.Dark2,
+        color: focused ? Colors.PrimaryDark : Colors.Dark2,
         paddingBottom: 8,
         paddingTop: 4,
       },

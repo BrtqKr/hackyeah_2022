@@ -1,24 +1,26 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import * as Api from '../../axios/api';
 import { Colors } from '../../theme/Colors';
 import { FeedTasksHeader } from './FeedTasksHeader';
 import { FeedTaskTile } from './FeedTaskTile';
-import {useQuery} from '@tanstack/react-query';
-import * as Api from '../../axios/api';
 
 export const FeedTasksList = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const { status, error, data } = useQuery(
-      [], // query key
-      Api.getTaskCompletions
+    [], // query key
+    Api.getTaskCompletions
   );
   ({});
 
   return (
     <FlatList
       data={data?.data ?? []}
-      renderItem={({ item, index }) => <FeedTaskTile tileIndex={index} taskCompletion={item?.attributes} />}
+      renderItem={({ item, index }) => (
+        <FeedTaskTile tileIndex={index} taskCompletion={item?.attributes} />
+      )}
       keyExtractor={(item) => item.id}
       refreshing={isRefreshing}
       refreshControl={
@@ -55,5 +57,6 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
     width: '100%',
     backgroundColor: Colors.White1,
+    minHeight: '100%',
   },
 });

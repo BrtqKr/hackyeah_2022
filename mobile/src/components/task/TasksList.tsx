@@ -1,17 +1,17 @@
-import React, { ComponentPropsWithoutRef, useEffect } from 'react';
-import { FlatList, Text, View, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { TaskStatus } from '../../navigation/navigators/AppCoreNavigator/TasksNavigator/types';
-import { sizeMap } from '../../theme/Iconography';
-import { ScreenWrapper } from '../shared';
-import { Colors } from '../../theme/Colors';
-import { Typography } from '../../theme/Typography/Typography';
+import React, { ComponentPropsWithoutRef, useEffect } from 'react';
+import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { ApiResponse, TasksWithMetadata } from '../../axios/types';
 import { AppCoreStackParamList } from '../../navigation/navigators/AppCoreNavigator/AppCoreNavigator';
+import { TaskStatus } from '../../navigation/navigators/AppCoreNavigator/TasksNavigator/types';
+import { Colors } from '../../theme/Colors';
+import { sizeMap } from '../../theme/Iconography';
+import { Typography } from '../../theme/Typography/Typography';
+import { ScreenWrapper } from '../shared';
 
 interface MockImage {
   url: string;
