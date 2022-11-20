@@ -25,8 +25,6 @@ const CommentsScreen = () => {
     onError: (error: AxiosError) => console.log({ error: error.name }),
   });
 
-  console.log({ status, data: data?.data });
-
   return (
     <View>
       <StatusBar barStyle="light-content" />

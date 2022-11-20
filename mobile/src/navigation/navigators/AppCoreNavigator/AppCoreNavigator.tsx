@@ -10,7 +10,7 @@ import TaskDetailsScreen from './TasksNavigator/TaskDetailsScreen';
 export type AppCoreStackParamList = {
   BottomNavigatorRoute: undefined;
   EditProfile: undefined;
-  TaskDetailsRoute: { taskId: string };
+  TaskDetailsRoute: { taskId: number };
 };
 
 export const headerOptions: StackNavigationOptions = {
