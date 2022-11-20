@@ -1,10 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import FeedScreen from './FeedScreen';
+import AlertsScreen from './AlertsScreen';
 import CommentsScreen from './CommentsScreen';
+import FeedScreen from './FeedScreen';
 
 export type FeedNavigatorStackParamList = {
   FeedRoute: undefined;
-  CommentsRoute: {taskId: string};
+  CommentsRoute: { taskId: string };
+  AlertsRoute: undefined;
 };
 
 const FeedNavigator = () => {
@@ -16,9 +18,9 @@ const FeedNavigator = () => {
         headerShown: false,
       }}
     >
-        <Stack.Screen name="CommentsRoute" component={CommentsScreen} />
       <Stack.Screen name="FeedRoute" component={FeedScreen} />
-
+      <Stack.Screen name="CommentsRoute" component={CommentsScreen} />
+      <Stack.Screen name="AlertsRoute" component={AlertsScreen} />
     </Stack.Navigator>
   );
 };

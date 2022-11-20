@@ -14,13 +14,15 @@
   "attributes": {
     "users_permissions_user": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "task_completions"
     },
     "task": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::task.task"
+      "relation": "manyToOne",
+      "target": "api::task.task",
+      "inversedBy": "task_completions"
     },
     "date_completed": {
       "type": "datetime"

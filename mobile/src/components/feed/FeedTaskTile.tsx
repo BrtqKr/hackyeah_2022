@@ -1,76 +1,143 @@
 import { Feather, FontAwesome } from '@expo/vector-icons';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Animated, {
+  Easing,
+  Extrapolation,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { Colors } from '../../theme/Colors';
 import { radiusMap } from '../../theme/Constants';
 import { sizeMap } from '../../theme/Iconography';
 import { Typography } from '../../theme/Typography/Typography';
 import BlurWrapper from '../shared/BlurWrapper';
 
-const IMAGE_HEIGHT = 200;
 const IMAGE_RADIUS = radiusMap.XLarge - 12;
 
-export const FeedTaskTile = (task: any) => {
+export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: any }) => {
+  const animationProgress = useSharedValue(1.7);
+
+  const fireAnimation = () => {
+    setTimeout(() => {
+      animationProgress.value = withTiming(2, { duration: 500, easing: Easing.out(Easing.quad) });
+    }, 500);
+  };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      fireAnimation();
+    }, 200 + tileIndex * 500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const animatedRotation = useAnimatedStyle(
+    () => ({
+      opacity: interpolate(animationProgress.value, [1.8, 2], [0, 1], Extrapolation.CLAMP),
+      transform: [
+        {
+          translateY: -312 * (2 - animationProgress.value),
+        },
+      ],
+    }),
+    []
+  );
+
   return (
-    <View style={styles.container}>
-      <View style={styles.userInfoContainer}>
-        <Image
-          style={styles.avatar}
-          source={{
-            uri: task?.author?.avatarUrl ?? undefined,
-          }}
-        />
-        <View style={{}}>
-          <Text style={[Typography.text3, styles.userName]}>{task?.author?.name}</Text>
-          <Text style={[Typography.text4, styles.userRole]}>CEO</Text>
-        </View>
-      </View>
-
-      <View style={{ padding: 12 }}>
-        <View style={{ overflow: 'hidden', borderRadius: IMAGE_RADIUS }}>
-          <Image
-            style={{ height: IMAGE_HEIGHT }}
-            source={{
-              uri: task.imageUrl,
-            }}
-          />
-          <BlurWrapper style={styles.blurWrapper}>
-            <Text style={[Typography.text2, { fontWeight: 'bold', color: Colors.White1 }]}>
-              {task.title}
-            </Text>
-            <View style={{ flexDirection: 'row' }}>
-              <TouchableOpacity onPress={() => {}}>
-                <FontAwesome
-                  name={task.likedByYou ? 'heart-o' : 'heart'}
-                  size={sizeMap.Regular}
-                  color={Colors.White1}
-                  style={{ marginRight: 8 }}
+    <Animated.View style={[styles.container, animatedRotation]}>
+      <View style={{ paddingHorizontal: 10 }}>
+        <View style={styles.container}>
+          <View>
+            <View style={{ overflow: 'hidden', borderRadius: IMAGE_RADIUS }}>
+              <View
+                style={{
+                  position: 'absolute',
+                  top: 8,
+                  left: 12,
+                  zIndex: 10,
+                }}
+              >
+                <Image
+                  style={styles.avatar}
+                  source={{
+                    uri: task?.author?.avatarUrl ?? undefined,
+                  }}
                 />
-              </TouchableOpacity>
+              </View>
+              <Image
+                style={{ aspectRatio: 1 }}
+                source={{
+                  uri: task.imageUrl,
+                }}
+              />
+              <BlurWrapper style={styles.blurWrapper}>
+                <View style={styles.userInfoContainer}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <Text style={[Typography.text2, { fontWeight: 'bold', color: Colors.White1 }]}>
+                      {task.title}
+                    </Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                      }}
+                    >
+                      <TouchableOpacity onPress={() => {}}>
+                        <FontAwesome
+                          name={task.likedByYou ? 'heart-o' : 'heart'}
+                          size={sizeMap.Regular}
+                          color={Colors.White1}
+                          style={{ marginRight: 8 }}
+                        />
+                      </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => {}}>
-                <Feather name={'message-circle'} size={sizeMap.Regular} color={Colors.White1} />
-              </TouchableOpacity>
+                      <TouchableOpacity onPress={() => {}}>
+                        <Feather
+                          name={'message-circle'}
+                          size={sizeMap.Regular}
+                          color={Colors.White1}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <View style={{ marginTop: 12 }}>
+                    <Text style={[Typography.text3, { color: Colors.White1 }]} ellipsizeMode="clip">
+                      {task.description}
+                    </Text>
+                  </View>
+                </View>
+              </BlurWrapper>
             </View>
-          </BlurWrapper>
+          </View>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: '#991B1B',
     borderRadius: radiusMap.XLarge,
     overflow: 'hidden',
   },
-  userInfoContainer: { padding: 16, paddingBottom: 4, flexDirection: 'row' },
+  userInfoContainer: {
+    paddingBottom: 4,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    overflow: 'hidden',
+  },
   avatar: {
-    width: 32,
-    height: 32,
+    width: 40,
+    height: 40,
     borderRadius: radiusMap.Circle,
     borderColor: Colors.White1,
     borderWidth: 1.5,
@@ -78,14 +145,15 @@ const styles = StyleSheet.create({
   },
   blurWrapper: {
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    flexDirection: 'row',
+    paddingTop: 8,
+    paddingBottom: 24,
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    alignItems: 'center',
+    height: '30%',
+
     justifyContent: 'space-between',
   },
-  userName: { fontWeight: 'bold', color: Colors.White1 },
+  userName: { fontWeight: 'bold', color: Colors.Dark1 },
   userRole: { fontWeight: 'bold', color: Colors.White1, opacity: 0.8 },
 });
