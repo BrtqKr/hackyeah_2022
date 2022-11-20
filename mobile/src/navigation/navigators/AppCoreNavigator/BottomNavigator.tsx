@@ -7,7 +7,7 @@ import { sizeMap } from '../../../theme/Iconography';
 import { Typography } from '../../../theme/Typography/Typography';
 import ProfileNavigator from '../ProfileNavigator/ProfileNavigator';
 import FeedNavigator from './FeedNavigator/FeedNavigator';
-import TasksScreen from './TasksScreen';
+import TaskNavigator from './TasksNavigator/TaskNavigator';
 
 const TabIcon = ({
   icon,
@@ -59,7 +59,7 @@ const BottomNavigator = () => {
       />
       <Tab.Screen
         name="TasksRoute"
-        component={TasksScreen}
+        component={TaskNavigator}
         options={{
           tabBarLabel: ({ focused }) => <TabLabel label="Tasks" focused={focused} />,
           tabBarIcon: ({ focused }) => <TabIcon icon="clipboard" focused={focused} />,
