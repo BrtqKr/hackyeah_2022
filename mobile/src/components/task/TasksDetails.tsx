@@ -1,14 +1,45 @@
-import React from 'react';
-import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import { radiusMap } from '../../theme/Constants';
+import * as ImagePicker from 'expo-image-picker';
+import { ImagePickerResult } from 'expo-image-picker/src/ImagePicker.types';
+import { Feather } from '@expo/vector-icons';
+import { Colors } from '../../theme/Colors';
 
 const IMAGE_SIDE = 100;
 const IMAGE_RADIUS = 9999;
 
 export const TaskDetails = (task: any) => {
+  const [image, setImage] = useState<string | undefined>(undefined);
+
+  const pickImage = async () => {
+    const result: ImagePickerResult = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
+  const addCompletedTask = async () => {
+    console.log(image);
+  };
+
   return (
     <ScrollView>
-      <View style={{ paddingBottom: 110 }}>
+      <View style={{ paddingBottom: 60, backgroundColor: '#fff' }}>
         <View style={styles.header}>
           <View style={{ padding: 50 }}></View>
           <View style={styles.taskDetails}>
@@ -20,8 +51,32 @@ export const TaskDetails = (task: any) => {
                 }}
               />
             </View>
-            <View style={styles.taskName}>
-              <Text style={styles.taskNameText}>Lorem impsum doloret sit amet</Text>
+            <View
+              style={{
+                position: 'absolute',
+                flex: 1,
+                flexDirection: 'row',
+                top: 30,
+                right: 30,
+              }}
+            >
+              <Text style={{ paddingRight: 10 }}>In progress</Text>
+              <Feather name="loader" size={24} color="orange" />
+            </View>
+            <View
+              style={{
+                marginTop: 80,
+              }}
+            >
+              <Text>25th November 2022</Text>
+            </View>
+
+            <View
+              style={{
+                marginTop: 10,
+              }}
+            >
+              <Text style={styles.taskNameText}>Water the plants</Text>
             </View>
             <View style={styles.taskDescription}>
               <Text style={styles.taskDescriptionText}>
@@ -36,15 +91,39 @@ export const TaskDetails = (task: any) => {
           </View>
         </View>
         <View style={styles.uploadedImage}>
-          <View style={styles.uploadedImageTitle}>
-            <Text style={styles.taskNameText}>Your uploaded image:</Text>
-          </View>
-          <Image
-            source={{
-              uri: 'https://cdn.sanity.io/images/y346iw48/production/a59cbb8951fa663a7ffeef5324e1cf7037a70b57-4000x2250.jpg',
-            }}
-            style={{ width: 400, height: 200 }}
-          ></Image>
+          <TouchableOpacity onPress={pickImage} style={styles.uploadedImageTouchable}>
+            <ImageBackground
+              style={styles.uploadedImageBackground}
+              imageStyle={{ borderRadius: 25 }}
+              source={{ uri: image }}
+            >
+              {image == undefined ? (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Feather name="upload" size={60} color="#B5B5B5" />
+                  <Text style={{ color: '#B5B5B5', fontSize: 12, paddingTop: 6 }}>
+                    Dodaj zdjęcie
+                  </Text>
+                </View>
+              ) : null}
+            </ImageBackground>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonOpacity}
+            disabled={image == undefined}
+            onPress={addCompletedTask}
+          >
+            <View style={[styles.button, !image && { backgroundColor: '#EDEDED' }]}>
+              <Text style={[styles.buttonTitle, !image && { color: '#B5B5B5' }]}>
+                Zatwierdź zadanie
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -91,9 +170,39 @@ const styles = StyleSheet.create({
   },
   uploadedImage: {
     backgroundColor: '#fff',
+    flex: 1,
+    alignItems: 'center',
   },
-  uploadedImageTitle: {
-    padding: 20,
+  uploadedImageTouchable: {
+    marginTop: 40,
+    height: 230,
+    width: 230,
+  },
+  uploadedImageBackground: {
+    height: 230,
+    width: 230,
+    backgroundColor: '#EDEDED',
+    borderRadius: 25,
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: Colors.Primary1,
+    borderRadius: 40,
+    height: 48,
+    width: 140,
+    justifyContent: 'center',
+  },
+  buttonTitle: {
+    color: Colors.White1,
+    fontSize: 14,
+    fontWeight: '600',
+    lineHeight: 22,
+  },
+  buttonOpacity: {
+    marginTop: 38,
+    marginBottom: 60,
+    flex: 1,
+    alignItems: 'center',
   },
 });
 

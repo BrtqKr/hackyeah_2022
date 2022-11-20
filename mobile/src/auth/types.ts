@@ -1,5 +1,8 @@
+import { UserWithId } from '../axios/types';
+
 export interface LoginResponse {
   status: string;
+  user: UserWithId;
   jwt: string;
 }
 

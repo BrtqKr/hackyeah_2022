@@ -29,6 +29,14 @@
     },
     "extra": {
       "apiUrl": "http://188.68.236.47/api"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share your tast progress."
+        }
+      ]
+    ]
   }
 }
