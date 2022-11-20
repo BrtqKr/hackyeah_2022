@@ -86,7 +86,13 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::user-task.user-task",
-      "inversedBy": "liked_by"
+      "mappedBy": "liked_by"
+    },
+    "task_completions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-task.user-task",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

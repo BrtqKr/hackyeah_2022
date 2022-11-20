@@ -1,7 +1,15 @@
 import { Feather, FontAwesome } from '@expo/vector-icons';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Animated, {
+  Easing,
+  Extrapolation,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { Colors } from '../../theme/Colors';
 import { radiusMap } from '../../theme/Constants';
 import { sizeMap } from '../../theme/Iconography';
@@ -10,79 +18,108 @@ import BlurWrapper from '../shared/BlurWrapper';
 
 const IMAGE_RADIUS = radiusMap.XLarge - 12;
 
-export const FeedTaskTile = (task: any) => {
+export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: any }) => {
+  const animationProgress = useSharedValue(1.7);
+
+  const fireAnimation = () => {
+    setTimeout(() => {
+      animationProgress.value = withTiming(2, { duration: 500, easing: Easing.out(Easing.quad) });
+    }, 500);
+  };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      fireAnimation();
+    }, 200 + tileIndex * 500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const animatedRotation = useAnimatedStyle(
+    () => ({
+      opacity: interpolate(animationProgress.value, [1.8, 2], [0, 1], Extrapolation.CLAMP),
+      transform: [
+        {
+          translateY: -312 * (2 - animationProgress.value),
+        },
+      ],
+    }),
+    []
+  );
+
   return (
-    <View style={{ paddingHorizontal: 10 }}>
-      <View style={styles.container}>
-        <View>
-          <View style={{ overflow: 'hidden', borderRadius: IMAGE_RADIUS }}>
-            <View
-              style={{
-                position: 'absolute',
-                top: 8,
-                left: 12,
-                zIndex: 10,
-              }}
-            >
+    <Animated.View style={[styles.container, animatedRotation]}>
+      <View style={{ paddingHorizontal: 10 }}>
+        <View style={styles.container}>
+          <View>
+            <View style={{ overflow: 'hidden', borderRadius: IMAGE_RADIUS }}>
+              <View
+                style={{
+                  position: 'absolute',
+                  top: 8,
+                  left: 12,
+                  zIndex: 10,
+                }}
+              >
+                <Image
+                  style={styles.avatar}
+                  source={{
+                    uri: task?.author?.avatarUrl ?? undefined,
+                  }}
+                />
+              </View>
               <Image
-                style={styles.avatar}
+                style={{ aspectRatio: 1 }}
                 source={{
-                  uri: task?.author?.avatarUrl ?? undefined,
+                  uri: task.imageUrl,
                 }}
               />
-            </View>
-            <Image
-              style={{ aspectRatio: 1 }}
-              source={{
-                uri: task.imageUrl,
-              }}
-            />
-            <BlurWrapper style={styles.blurWrapper}>
-              <View style={styles.userInfoContainer}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    width: '100%',
-                  }}
-                >
-                  <Text style={[Typography.text2, { fontWeight: 'bold', color: Colors.White1 }]}>
-                    {task.title}
-                  </Text>
+              <BlurWrapper style={styles.blurWrapper}>
+                <View style={styles.userInfoContainer}>
                   <View
                     style={{
                       flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      width: '100%',
                     }}
                   >
-                    <TouchableOpacity onPress={() => {}}>
-                      <FontAwesome
-                        name={task.likedByYou ? 'heart-o' : 'heart'}
-                        size={sizeMap.Regular}
-                        color={Colors.White1}
-                        style={{ marginRight: 8 }}
-                      />
-                    </TouchableOpacity>
+                    <Text style={[Typography.text2, { fontWeight: 'bold', color: Colors.White1 }]}>
+                      {task.title}
+                    </Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                      }}
+                    >
+                      <TouchableOpacity onPress={() => {}}>
+                        <FontAwesome
+                          name={task.likedByYou ? 'heart-o' : 'heart'}
+                          size={sizeMap.Regular}
+                          color={Colors.White1}
+                          style={{ marginRight: 8 }}
+                        />
+                      </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => {}}>
-                      <Feather
-                        name={'message-circle'}
-                        size={sizeMap.Regular}
-                        color={Colors.White1}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity onPress={() => {}}>
+                        <Feather
+                          name={'message-circle'}
+                          size={sizeMap.Regular}
+                          color={Colors.White1}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <View style={{ marginTop: 12 }}>
+                    <Text style={[Typography.text3, { color: Colors.White1 }]} ellipsizeMode="clip">
+                      {task.description}
+                    </Text>
                   </View>
                 </View>
-                <View style={{ marginTop: 12 }}>
-                  <Text style={[Typography.text3, { color: Colors.White1 }]} ellipsizeMode="clip">
-                    {task.description}
-                  </Text>
-                </View>
-              </View>
-            </BlurWrapper>
+              </BlurWrapper>
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

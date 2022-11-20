@@ -55,7 +55,7 @@ export const FeedTasksList = () => {
   return (
     <FlatList
       data={FEED_TASKS}
-      renderItem={({ item }) => <FeedTaskTile {...item} />}
+      renderItem={({ item, index }) => <FeedTaskTile tileIndex={index} {...item} />}
       keyExtractor={(item) => item.id}
       refreshing={isRefreshing}
       refreshControl={
