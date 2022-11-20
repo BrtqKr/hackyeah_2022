@@ -15,7 +15,6 @@ const FeedScreen = () => {
   const { top } = useSafeAreaInsets();
   const { navigate } = useNavigation<Navigation>();
 
-  const HEADER_HEIGHT = top + 275;
   const TOP_OFFSET = top + 16;
 
   return (

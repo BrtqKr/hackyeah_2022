@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { Colors } from '../../theme/Colors';
-import Animated from 'react-native-reanimated';
+import { radiusMap } from '../../theme/Constants';
 
 export type LoadingBarRef = {
   animateTo: (percent: number) => void;
@@ -37,16 +37,17 @@ export default LoadingBar;
 
 const styles = StyleSheet.create({
   emptyBar: {
-    width: '100%',
-    height: 10,
-    backgroundColor: Colors.White1,
+    width: '80%',
+    height: 8,
+    backgroundColor: 'rgba(0,0,0,0.1)',
     overflow: 'hidden',
+    borderRadius: radiusMap.Circle,
   },
   fullBar: {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    backgroundColor: Colors.gold1,
+    backgroundColor: Colors.Dark3,
     opacity: 0,
   },
 });

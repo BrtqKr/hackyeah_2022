@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { radiusMap } from '../../theme/Constants';
 const IMAGE_SIDE = 100;
 const IMAGE_RADIUS = 9999;
