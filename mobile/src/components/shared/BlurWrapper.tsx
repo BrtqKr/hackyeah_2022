@@ -10,7 +10,7 @@ const BlurWrapper = ({ children, style }: Props) => {
   return Platform.OS === 'android' ? (
     <View style={[{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }, style]}>{children}</View>
   ) : (
-    <BlurView intensity={20} tint="dark" style={style}>
+    <BlurView intensity={30} tint="dark" style={style}>
       {children}
     </BlurView>
   );

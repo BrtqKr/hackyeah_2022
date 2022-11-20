@@ -123,6 +123,9 @@ export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: 
                     </Text>
                   </View>
                 </View>
+                <View
+                  style={[StyleSheet.absoluteFillObject, { backgroundColor: 'rgba(0,0,0,0.1)' }]}
+                />
               </BlurWrapper>
             </View>
           </View>

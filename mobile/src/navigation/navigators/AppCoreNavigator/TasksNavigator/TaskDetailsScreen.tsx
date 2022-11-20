@@ -1,6 +1,5 @@
 import React from 'react';
-import TaskDetails from '../../../../components/task/TasksDetails';
-import TaskNavigatorHeader from './TaskNavigatorHeader';
+import TaskDetails from '../../../../components/task/TaskDetails';
 
 export const TaskDetailsScreen = (task: any) => {
   return (
