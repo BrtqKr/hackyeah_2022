@@ -1,18 +1,18 @@
+import { Feather } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
+import { ImagePickerResult } from 'expo-image-picker/src/ImagePicker.types';
 import React, { useState } from 'react';
 import {
   Image,
+  ImageBackground,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
-  ScrollView,
-  ImageBackground,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import { radiusMap } from '../../theme/Constants';
-import * as ImagePicker from 'expo-image-picker';
-import { ImagePickerResult } from 'expo-image-picker/src/ImagePicker.types';
-import { Feather } from '@expo/vector-icons';
 import { Colors } from '../../theme/Colors';
+import { radiusMap } from '../../theme/Constants';
 
 const IMAGE_SIDE = 100;
 const IMAGE_RADIUS = 9999;

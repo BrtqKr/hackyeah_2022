@@ -1,5 +1,4 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import AlertsScreen from './AlertsScreen';
 import CommentsScreen from './CommentsScreen';
 import FeedScreen from './FeedScreen';
 
@@ -20,7 +19,6 @@ const FeedNavigator = () => {
     >
       <Stack.Screen name="FeedRoute" component={FeedScreen} />
       <Stack.Screen name="CommentsRoute" component={CommentsScreen} />
-      <Stack.Screen name="AlertsRoute" component={AlertsScreen} />
     </Stack.Navigator>
   );
 };

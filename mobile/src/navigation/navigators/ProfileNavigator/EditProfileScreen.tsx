@@ -3,7 +3,7 @@ import { LineEntry, ScreenWrapper } from '../../../components/shared';
 import { Feather } from '@expo/vector-icons';
 import { Colors } from '../../../theme/Colors';
 
-export const EditProfile = () => {
+export const EditProfileScreen = () => {
   return (
     <ScreenWrapper style={styles.wrapper}>
       <LineEntry

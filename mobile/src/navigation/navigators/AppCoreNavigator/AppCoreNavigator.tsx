@@ -1,15 +1,17 @@
-import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
-import { EditProfile } from '../ProfileNavigator/EditProfile';
-import BottomNavigator from './BottomNavigator';
 import { Feather } from '@expo/vector-icons';
+import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
+import { Text } from 'react-native';
 import { Colors } from '../../../theme/Colors';
 import { Typography } from '../../../theme/Typography/Typography';
-import { Text } from 'react-native';
+import { EditProfileScreen } from '../ProfileNavigator/EditProfileScreen';
+import AlertsScreen from './AlertsScreen';
+import BottomNavigator from './BottomNavigator';
 import TaskDetailsScreen from './TasksNavigator/TaskDetailsScreen';
 
 export type AppCoreStackParamList = {
   BottomNavigatorRoute: undefined;
-  EditProfile: undefined;
+  EditProfileRoute: undefined;
+  AlertsRoute: undefined;
   TaskDetailsRoute: { taskId: string };
 };
 
@@ -39,10 +41,11 @@ const AppCoreNavigator = () => {
     >
       <Stack.Screen name="BottomNavigatorRoute" component={BottomNavigator} />
       <Stack.Screen
-        name="EditProfile"
-        component={EditProfile}
+        name="EditProfileRoute"
+        component={EditProfileScreen}
         options={{ headerShown: true, ...headerOptions }}
       />
+      <Stack.Screen name="AlertsRoute" component={AlertsScreen} />
       <Stack.Screen
         options={{ headerShown: false }}
         name="TaskDetailsRoute"

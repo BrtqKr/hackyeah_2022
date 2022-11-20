@@ -9,6 +9,7 @@ export enum ColorName {
   Secondary4 = 'Secondary4',
   Dark1 = 'Dark1',
   Dark2 = 'Dark2',
+  Dark3 = 'Dark3',
   White1 = 'White1',
   Success1 = 'Success1',
   Success2 = 'Success2',
@@ -32,6 +33,7 @@ export const Colors: { [key in ColorName]: `#${string}` } = {
   Secondary4: '#a4acb3',
   Dark1: '#000',
   Dark2: '#313F46',
+  Dark3: '#121212',
   White1: '#E5EBED',
   Success1: '#72C944',
   Success2: '#78BA56',
@@ -41,7 +43,7 @@ export const Colors: { [key in ColorName]: `#${string}` } = {
   Blue3: '#98BEE6',
   Link: '#4286F4',
   Transparent: '#00000000',
-  Gold1: '#FFD700',
+  Gold1: '#EAC435',
 };
 
 export type Color = keyof typeof Colors;
