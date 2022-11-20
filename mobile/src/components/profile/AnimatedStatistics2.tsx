@@ -1,4 +1,4 @@
-import { Feather } from '@expo/vector-icons';
+import { Feather, FontAwesome } from '@expo/vector-icons';
 import { useIsFocused } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -10,21 +10,21 @@ import { radiusMap } from '../../theme/Constants';
 import { Typography } from '../../theme/Typography/Typography';
 import LoadingBar, { LoadingBarRef } from './LoadingBar';
 
-export const AnimatedStatistics = () => {
+export const AnimatedStatistics2 = () => {
   const [loading, setLoading] = useState(true);
   const isFocused = useIsFocused();
 
-  const missionsCompleted = useSharedValue(0);
-  const rankPosition = useSharedValue(0);
+  const commentsCompleted = useSharedValue(0);
+  const likesPosition = useSharedValue(0);
 
-  const missionsRef = useRef<LoadingBarRef>(null);
-  const rankRef = useRef<LoadingBarRef>(null);
+  const commentsRef = useRef<LoadingBarRef>(null);
+  const likesRef = useRef<LoadingBarRef>(null);
 
-  const missionsText = useDerivedValue(() => {
-    return `${Math.floor(missionsCompleted.value)} missions out of 90`;
+  const commentsText = useDerivedValue(() => {
+    return `${Math.floor(commentsCompleted.value)} comments`;
   });
-  const rankText = useDerivedValue(() => {
-    return `Rank ${Math.floor(rankPosition.value)} out of x`;
+  const likesText = useDerivedValue(() => {
+    return `${Math.floor(likesPosition.value)} likes`;
   });
 
   useEffect(() => {
@@ -34,10 +34,10 @@ export const AnimatedStatistics = () => {
       timeout = setTimeout(() => {
         setLoading(false);
         setTimeout(() => {
-          missionsRef.current?.animateTo(50);
-          missionsCompleted.value = withTiming(45, { duration: 2500 });
-          rankRef.current?.animateTo(50);
-          rankPosition.value = withTiming(45, { duration: 2500 });
+          commentsRef.current?.animateTo(50);
+          commentsCompleted.value = withTiming(45, { duration: 2500 });
+          likesRef.current?.animateTo(50);
+          likesPosition.value = withTiming(45, { duration: 2500 });
         }, 500);
       }, 1000);
     }
@@ -51,7 +51,7 @@ export const AnimatedStatistics = () => {
       <View style={{ flex: 1, alignItems: 'center' }}>
         <View style={styles.iconContainer}>
           <Feather
-            name="clipboard"
+            name="message-circle"
             size={40}
             style={{
               marginLeft: 'auto',
@@ -62,17 +62,17 @@ export const AnimatedStatistics = () => {
         </View>
         <ReText
           style={[Typography.text3, styles.text, { marginTop: 16, fontWeight: '500' }]}
-          text={missionsText}
+          text={commentsText}
           numberOfLines={1}
         />
         <View style={{ height: 8 }} />
 
-        <LoadingBar ref={missionsRef} />
+        <LoadingBar ref={commentsRef} />
       </View>
       <View style={{ flex: 1, alignItems: 'center' }}>
         <View style={styles.iconContainer}>
-          <Feather
-            name="award"
+          <FontAwesome
+            name="heart"
             size={40}
             color={Colors.Dark3}
             style={{ marginLeft: 'auto', marginRight: 'auto' }}
@@ -80,11 +80,11 @@ export const AnimatedStatistics = () => {
         </View>
         <ReText
           style={[Typography.text3, styles.text, { marginTop: 16, fontWeight: '500' }]}
-          text={rankText}
+          text={likesText}
           numberOfLines={2}
         />
         <View style={{ height: 8 }} />
-        <LoadingBar ref={rankRef} />
+        <LoadingBar ref={likesRef} />
       </View>
     </Animatable.View>
   ) : null;
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingTop: 100,
+    paddingTop: 200,
   },
   text: {
     textAlign: 'center',

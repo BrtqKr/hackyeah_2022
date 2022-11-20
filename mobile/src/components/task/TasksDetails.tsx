@@ -1,17 +1,16 @@
 import React, { ComponentPropsWithoutRef, useState } from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  ImageBackground,
-  TouchableOpacity,
-} from 'react-native';
-import { radiusMap } from '../../theme/Constants';
+import { Feather } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { ImagePickerResult } from 'expo-image-picker/src/ImagePicker.types';
-import { Feather } from '@expo/vector-icons';
+import {
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Colors } from '../../theme/Colors';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { AppCoreStackParamList } from '../../navigation/navigators/AppCoreNavigator/AppCoreNavigator';
@@ -22,6 +21,7 @@ import { ApiResponse, TasksWithMetadata } from '../../axios/types';
 import { TaskStatus } from '../../navigation/navigators/AppCoreNavigator/TasksNavigator/types';
 import { Typography } from '../../theme/Typography/Typography';
 import { sizeMap } from '../../theme/Iconography';
+import { radiusMap } from '../../theme/Constants';
 
 const IMAGE_SIDE = 100;
 const IMAGE_RADIUS = 9999;
