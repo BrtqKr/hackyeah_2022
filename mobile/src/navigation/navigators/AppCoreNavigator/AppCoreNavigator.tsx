@@ -5,10 +5,12 @@ import { Feather } from '@expo/vector-icons';
 import { Colors } from '../../../theme/Colors';
 import { Typography } from '../../../theme/Typography/Typography';
 import { Text } from 'react-native';
+import TaskDetailsScreen from './TasksNavigator/TaskDetailsScreen';
 
 export type AppCoreStackParamList = {
   BottomNavigatorRoute: undefined;
   EditProfile: undefined;
+  TaskDetailsRoute: { taskId: string };
 };
 
 export const headerOptions: StackNavigationOptions = {
@@ -40,6 +42,11 @@ const AppCoreNavigator = () => {
         name="EditProfile"
         component={EditProfile}
         options={{ headerShown: true, ...headerOptions }}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="TaskDetailsRoute"
+        component={TaskDetailsScreen}
       />
     </Stack.Navigator>
   );

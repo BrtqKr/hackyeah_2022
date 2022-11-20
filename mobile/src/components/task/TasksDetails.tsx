@@ -1,10 +1,19 @@
-import React, {useState} from 'react';
-import {Image, StyleSheet, Text, View, ScrollView, ImageBackground, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import { radiusMap } from '../../theme/Constants';
 import * as ImagePicker from 'expo-image-picker';
-import {ImagePickerResult} from 'expo-image-picker/src/ImagePicker.types';
+import { ImagePickerResult } from 'expo-image-picker/src/ImagePicker.types';
 import { Feather } from '@expo/vector-icons';
-import {Colors} from '../../theme/Colors';
+import { Colors } from '../../theme/Colors';
+
 const IMAGE_SIDE = 100;
 const IMAGE_RADIUS = 9999;
 
@@ -26,42 +35,47 @@ export const TaskDetails = (task: any) => {
 
   const addCompletedTask = async () => {
     console.log(image);
-  }
-
+  };
 
   return (
-    <ScrollView >
-      <View style={{ paddingBottom: 60, backgroundColor: '#fff', }}>
+    <ScrollView>
+      <View style={{ paddingBottom: 60, backgroundColor: '#fff' }}>
         <View style={styles.header}>
           <View style={{ padding: 50 }}></View>
           <View style={styles.taskDetails}>
-              <View style={styles.taskAvatar}>
-                <Image
-                  style={{ height: IMAGE_SIDE, width: IMAGE_SIDE }}
-                  source={{
-                    uri: 'https://pics.freeicons.io/uploads/icons/png/3158397191660787374-512.png',
-                  }}
-                />
-              </View>
-              <View style={{
+            <View style={styles.taskAvatar}>
+              <Image
+                style={{ height: IMAGE_SIDE, width: IMAGE_SIDE }}
+                source={{
+                  uri: 'https://pics.freeicons.io/uploads/icons/png/3158397191660787374-512.png',
+                }}
+              />
+            </View>
+            <View
+              style={{
                 position: 'absolute',
                 flex: 1,
                 flexDirection: 'row',
                 top: 30,
                 right: 30,
-              }}>
-                <Text style={{paddingRight:10}}>In progress</Text>
-                <Feather name="loader" size={24} color="orange" />
-              </View>
-            <View style={{
-              marginTop: 80,
-            }}>
-              <Text >25th November 2022</Text>
+              }}
+            >
+              <Text style={{ paddingRight: 10 }}>In progress</Text>
+              <Feather name="loader" size={24} color="orange" />
+            </View>
+            <View
+              style={{
+                marginTop: 80,
+              }}
+            >
+              <Text>25th November 2022</Text>
             </View>
 
-            <View style={{
-              marginTop: 10,
-            }}>
+            <View
+              style={{
+                marginTop: 10,
+              }}
+            >
               <Text style={styles.taskNameText}>Water the plants</Text>
             </View>
             <View style={styles.taskDescription}>
@@ -80,27 +94,34 @@ export const TaskDetails = (task: any) => {
           <TouchableOpacity onPress={pickImage} style={styles.uploadedImageTouchable}>
             <ImageBackground
               style={styles.uploadedImageBackground}
-              imageStyle={{ borderRadius: 25}}
-              source={{uri: image,}}
+              imageStyle={{ borderRadius: 25 }}
+              source={{ uri: image }}
             >
-              {image == undefined ? <View style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <Feather name="upload" size={60} color="#B5B5B5" />
-                <Text style={{color:'#B5B5B5', fontSize: 12, paddingTop: 6}}>Dodaj zdjęcie</Text>
-              </View> : null
-              }
-
+              {image == undefined ? (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Feather name="upload" size={60} color="#B5B5B5" />
+                  <Text style={{ color: '#B5B5B5', fontSize: 12, paddingTop: 6 }}>
+                    Dodaj zdjęcie
+                  </Text>
+                </View>
+              ) : null}
             </ImageBackground>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonOpacity}
-                            disabled={image == undefined}
-                            onPress={addCompletedTask}>
-            <View style={[styles.button, !image && { backgroundColor: '#EDEDED' }]
-            }>
-              <Text style={[styles.buttonTitle, !image && { color: '#B5B5B5' }]}>Zatwierdź zadanie</Text>
+          <TouchableOpacity
+            style={styles.buttonOpacity}
+            disabled={image == undefined}
+            onPress={addCompletedTask}
+          >
+            <View style={[styles.button, !image && { backgroundColor: '#EDEDED' }]}>
+              <Text style={[styles.buttonTitle, !image && { color: '#B5B5B5' }]}>
+                Zatwierdź zadanie
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -181,8 +202,8 @@ const styles = StyleSheet.create({
     marginTop: 38,
     marginBottom: 60,
     flex: 1,
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 export default TaskDetails;
