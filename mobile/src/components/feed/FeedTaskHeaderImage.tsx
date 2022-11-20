@@ -1,4 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
+import CrownSvg from '../../../svgs/CrownSvg';
 import { Colors } from '../../theme/Colors';
 import { radiusMap } from '../../theme/Constants';
 import { fontSize } from '../../theme/Typography/textProperties';
@@ -13,6 +14,11 @@ export const LeaderboardEntry = ({ user, winner }: LeaderboardEntryProps) => {
 
   return (
     <View style={[styles.container, winner && { marginTop: 12 }]}>
+      {winner && (
+        <View style={{ zIndex: 40, width: 40, height: 40 }}>
+          <CrownSvg />
+        </View>
+      )}
       <Image
         style={[{ height: AVATAR_SIZE, width: AVATAR_SIZE }, styles.avatar]}
         source={{
@@ -37,6 +43,7 @@ export const LeaderboardEntry = ({ user, winner }: LeaderboardEntryProps) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
+    alignItems: 'center',
   },
   avatar: {
     borderRadius: radiusMap.Circle,
