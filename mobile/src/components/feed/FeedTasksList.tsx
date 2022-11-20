@@ -14,6 +14,8 @@ const FEED_TASKS = [
       avatarUrl: 'https://i1.sndcdn.com/avatars-000529882611-ht5r1v-t500x500.jpg',
     },
     likedByYou: false,
+    description:
+      'Lorem ipsum anifqworjqw werij qwrio jwqio rjqweio rqwji roqwjir wqeji rweqji rqewijreiwqrjworjwq weqj rowiq jqwio jrioqwe jriqweo rjqiwoerj qwoijrqweiorjq woirqjwrioqwej roiqw',
   },
   {
     title: 'Plant a tree',
@@ -25,6 +27,8 @@ const FEED_TASKS = [
       avatarUrl: 'https://i1.sndcdn.com/avatars-000529882611-ht5r1v-t500x500.jpg',
     },
     likedByYou: true,
+    description:
+      'Lorem ipsum anifqworjqw werij qwrio jwqio rjqweio rqwji roqwjir wqeji rweqji rqewijreiwqrjworjwq weqj rowiq jqwio jrioqwe jriqweo rjqiwoerj qwoijrqweiorjq woirqjwrioqwej roiqw',
   },
   {
     title: 'Plant a tree',
@@ -35,6 +39,8 @@ const FEED_TASKS = [
       name: 'Patrick Bateman',
       avatarUrl: 'https://i1.sndcdn.com/avatars-000529882611-ht5r1v-t500x500.jpg',
     },
+    description:
+      'Lorem ipsum anifqworjqw werij qwrio jwqio rjqweio rqwji roqwjir wqeji rweqji rqewijreiwqrjworjwq weqj rowiq jqwio jrioqwe jriqweo rjqiwoerj qwoijrqweiorjq woirqjwrioqwej roiqw',
   },
   { title: 'Plant a tree', id: '4' },
   { title: 'Plant a tree', id: '5' },
