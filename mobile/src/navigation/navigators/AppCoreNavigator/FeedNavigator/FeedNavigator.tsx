@@ -16,8 +16,8 @@ const FeedNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="CommentsRoute" component={CommentsScreen} />
       <Stack.Screen name="FeedRoute" component={FeedScreen} />
+      <Stack.Screen name="CommentsRoute" component={CommentsScreen} />
     </Stack.Navigator>
   );
 };

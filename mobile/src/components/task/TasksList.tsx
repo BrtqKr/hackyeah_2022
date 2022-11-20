@@ -1,15 +1,18 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import { FlatList, Text, View, Image, StyleSheet } from 'react-native';
-import ScreenWrapper from '../../../components/shared/ScreenWrapper';
-import { Colors } from '../../../theme/Colors';
-import { sizeMap } from '../../../theme/Iconography';
 import { Feather } from '@expo/vector-icons';
-
-type Status = 'completed' | 'inProgress' | 'failed';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { TaskNavigatorStackParamList } from '../../navigation/navigators/AppCoreNavigator/TasksNavigator/TaskNavigator';
+import { TaskStatus } from '../../navigation/navigators/AppCoreNavigator/TasksNavigator/types';
+import { sizeMap } from '../../theme/Iconography';
+import { ScreenWrapper } from '../shared';
+import { Colors } from '../../theme/Colors';
 
 interface MockImage {
   url: string;
-  status: Status;
+  status: TaskStatus;
 }
 
 const mockImages: MockImage[] = [
@@ -39,9 +42,14 @@ const mockImages: MockImage[] = [
   },
 ];
 
+type Navigation = StackNavigationProp<TaskNavigatorStackParamList>;
+
 type IconName = Pick<ComponentPropsWithoutRef<typeof Feather>, 'name'>;
 
-const statusToImageStyle: Record<Status, IconName & { color: string; backgroundColor: string }> = {
+const statusToImageStyle: Record<
+  TaskStatus,
+  IconName & { color: string; backgroundColor: string }
+> = {
   failed: {
     name: 'slash',
     color: Colors.Primary1,
@@ -62,42 +70,45 @@ const statusToImageStyle: Record<Status, IconName & { color: string; backgroundC
 const Card = ({ index }: { index: number }) => {
   const { url, status } = mockImages[index % mockImages.length];
   const { backgroundColor, ...iconProps } = statusToImageStyle[status];
+  const { navigate } = useNavigation<Navigation>();
   return (
-    <View
-      style={[
-        styles.card,
-        { backgroundColor },
-        index % 2 === 0
-          ? {
-              marginRight: 20,
-            }
-          : {
-              marginLeft: 20,
-            },
-      ]}
-    >
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: url,
-          }}
-        />
-        <Feather
-          style={{ position: 'absolute', top: 5, right: 5 }}
-          size={sizeMap.Regular}
-          {...iconProps}
-        />
-      </View>
-      <View style={styles.thumbnailContainer}>
-        <View style={styles.thumbnail}>
-          <Text style={styles.thumbnailText}>Lorem ipsum doloret sit amet</Text>
+    <TouchableOpacity onPress={() => navigate('TaskDetailsRoute', { taskId: 'lol' })}>
+      <View
+        style={[
+          styles.card,
+          { backgroundColor },
+          index % 2 === 0
+            ? {
+                marginRight: 20,
+              }
+            : {
+                marginLeft: 20,
+              },
+        ]}
+      >
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: url,
+            }}
+          />
+          <Feather
+            style={{ position: 'absolute', top: 5, right: 5 }}
+            size={sizeMap.Regular}
+            {...iconProps}
+          />
+        </View>
+        <View style={styles.thumbnailContainer}>
+          <View style={styles.thumbnail}>
+            <Text style={styles.thumbnailText}>Lorem ipsum doloret sit amet</Text>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
-const TasksScreen = () => {
+const TasksList = () => {
   return (
     <ScreenWrapper style={styles.screenWraper} safeArea>
       <Text>Twoje trwające zadania</Text>
@@ -142,4 +153,4 @@ const styles = StyleSheet.create({
   screenWraper: { alignItems: 'center' },
 });
 
-export default TasksScreen;
+export default TasksList;
