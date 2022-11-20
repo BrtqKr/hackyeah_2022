@@ -35,16 +35,34 @@ export const TaskDetails = (task: any) => {
         <View style={styles.header}>
           <View style={{ padding: 50 }}></View>
           <View style={styles.taskDetails}>
-            <View style={styles.taskAvatar}>
-              <Image
-                style={{ height: IMAGE_SIDE, width: IMAGE_SIDE }}
-                source={{
-                  uri: 'https://pics.freeicons.io/uploads/icons/png/3158397191660787374-512.png',
-                }}
-              />
+              <View style={styles.taskAvatar}>
+                <Image
+                  style={{ height: IMAGE_SIDE, width: IMAGE_SIDE }}
+                  source={{
+                    uri: 'https://pics.freeicons.io/uploads/icons/png/3158397191660787374-512.png',
+                  }}
+                />
+              </View>
+              <View style={{
+                position: 'absolute',
+                flex: 1,
+                flexDirection: 'row',
+                top: 30,
+                right: 30,
+              }}>
+                <Text style={{paddingRight:10}}>In progress</Text>
+                <Feather name="loader" size={24} color="orange" />
+              </View>
+            <View style={{
+              marginTop: 80,
+            }}>
+              <Text >25th November 2022</Text>
             </View>
-            <View style={styles.taskName}>
-              <Text style={styles.taskNameText}>Lorem impsum doloret sit amet</Text>
+
+            <View style={{
+              marginTop: 10,
+            }}>
+              <Text style={styles.taskNameText}>Water the plants</Text>
             </View>
             <View style={styles.taskDescription}>
               <Text style={styles.taskDescriptionText}>
