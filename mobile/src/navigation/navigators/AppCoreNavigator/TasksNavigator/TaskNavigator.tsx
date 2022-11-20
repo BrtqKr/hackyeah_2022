@@ -1,6 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import TasksScreen from './TasksScreen';
 import TaskDetailsScreen from './TaskDetailsScreen';
+import React from 'react';
+import { View, Text } from 'react-native';
+import TaskNavigatorHeader from './TaskNavigatorHeader';
 
 export type TaskNavigatorStackParamList = {
   AllTasksRoute: undefined;
@@ -13,7 +16,8 @@ const TaskNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        header: () => <TaskNavigatorHeader />,
       }}
     >
       <Stack.Screen name="AllTasksRoute" component={TasksScreen} />
