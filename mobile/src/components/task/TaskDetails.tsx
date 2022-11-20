@@ -3,6 +3,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
 import * as ImagePicker from 'expo-image-picker';
 import { ImagePickerResult } from 'expo-image-picker';
+import { format } from 'date-fns'
 import React, { ComponentPropsWithoutRef, useState } from 'react';
 import {
   Image,
@@ -92,6 +93,13 @@ export const TaskDetails = ({ taskId } : { taskId: number }) => {
     }
   };
 
+  let formattedDate = ''
+
+  if(selectedTask?.attributes?.date_finished != null) {
+    const date = new Date(selectedTask?.attributes?.date_finished || '')
+     formattedDate =  format(date, 'do MMMM y')
+
+  }
   if (!isLoading && !selectedTask) {
     return null;
   }
@@ -144,7 +152,7 @@ export const TaskDetails = ({ taskId } : { taskId: number }) => {
                   marginBottom: 12,
                 }}
               >
-                <Text>{selectedTask?.attributes?.date_finished}</Text>
+                <Text>{formattedDate}</Text>
               </View>
 
               <View
