@@ -1,15 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-<<<<<<< HEAD
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useEffect } from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, StatusBar, Text, View } from 'react-native';
 import { useAuthContext } from '../../../../auth/AuthProvider';
 import * as Api from '../../../../axios/api';
 import * as ApiTypes from '../../../../axios/types';
-=======
-import { Button, StatusBar, Text, View } from 'react-native';
->>>>>>> main
 
 const CommentsScreen = () => {
   const { navigate } = useNavigation();
