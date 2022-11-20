@@ -1,6 +1,8 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../theme/Colors';
 import { radiusMap } from '../../theme/Constants';
+import { fontSize } from '../../theme/Typography/textProperties';
+import { Typography } from '../../theme/Typography/Typography';
 
 interface LeaderboardEntryProps {
   user: any;
@@ -18,8 +20,15 @@ export const LeaderboardEntry = ({ user, winner }: LeaderboardEntryProps) => {
         }}
       />
       <View style={{ marginTop: 12, alignItems: 'center' }}>
-        <Text style={{ color: Colors.White1 }}>{user.firstName}</Text>
-        <Text style={{ color: Colors.White1 }}>{user.lastName}</Text>
+        <Text
+          style={[
+            Typography.text2,
+            { color: Colors.White1, fontSize: fontSize.Large, fontWeight: '300', marginBottom: 2 },
+          ]}
+        >
+          {user.points}
+        </Text>
+        <Text style={{ color: Colors.White1, fontWeight: '600' }}>{user.firstName}</Text>
       </View>
     </View>
   );

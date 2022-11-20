@@ -1,7 +1,7 @@
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StatusBar, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FeedTasksList } from '../../../../components/feed';
 import { ScreenWrapper } from '../../../../components/shared';
@@ -20,6 +20,8 @@ const FeedScreen = () => {
 
   return (
     <ScreenWrapper style={{ backgroundColor: Colors.PrimaryDark }}>
+      <StatusBar barStyle="light-content" />
+
       <View style={[styles.mainTopBar, { paddingTop: TOP_OFFSET }]}>
         <TouchableOpacity onPress={() => navigate('AlertsRoute')}>
           <Feather name={'bell'} size={sizeMap.Regular} color={Colors.White1} />

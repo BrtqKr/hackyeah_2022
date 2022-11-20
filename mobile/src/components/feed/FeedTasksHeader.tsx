@@ -11,28 +11,31 @@ const LEADERBOARD_USERS = [
     lastName: 'Allen',
     tasksCompleted: 12,
     avatarUrl: 'https://i1.sndcdn.com/avatars-000529882611-ht5r1v-t500x500.jpg',
+    points: 2004,
   },
   {
     firstName: 'John',
     lastName: 'Paul',
     tasksCompleted: 11,
     avatarUrl: 'https://i1.sndcdn.com/avatars-000529882611-ht5r1v-t500x500.jpg',
+    points: 1002,
   },
   {
     firstName: 'Patrick',
     lastName: 'Bateman',
     tasksCompleted: 10,
     avatarUrl: 'https://i1.sndcdn.com/avatars-000529882611-ht5r1v-t500x500.jpg',
+    points: 928,
   },
 ];
 
 export const FeedTasksHeader = (task: any) => {
   const { top } = useSafeAreaInsets();
 
-  const HEADER_HEIGHT = top + 200;
+  //   const HEADER_HEIGHT = top + 210;
 
   return (
-    <View style={[styles.container, { height: HEADER_HEIGHT }]}>
+    <View style={[styles.container]}>
       <View style={styles.leaderboardContainer}>
         <LeaderboardEntry user={LEADERBOARD_USERS[1]} />
         <LeaderboardEntry user={LEADERBOARD_USERS[0]} winner />
@@ -69,13 +72,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',
-    marginTop: 12,
+    marginTop: 36,
   },
   placementLabelWrapper: {
     alignItems: 'center',
     width: '100%',
-    flex: 1,
-    justifyContent: 'center',
+
+    justifyContent: 'flex-end',
+    paddingBottom: 16,
+    paddingTop: 32,
   },
   placementLabel: {
     paddingLeft: 6,
