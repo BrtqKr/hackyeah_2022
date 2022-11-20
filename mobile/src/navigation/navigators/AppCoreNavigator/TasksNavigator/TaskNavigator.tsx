@@ -8,7 +8,14 @@ import TaskNavigatorHeader from './TaskNavigatorHeader';
 export type TaskNavigatorStackParamList = {
   AllTasksRoute: undefined;
   TaskDetailsRoute: { taskId: string };
+  StoryTasksRoute: undefined;
 };
+
+const StoryTasksComponent = () => (
+  <View>
+    <Text>StoryTaskRoute</Text>
+  </View>
+);
 
 const TaskNavigator = () => {
   const Stack = createStackNavigator<TaskNavigatorStackParamList>();
@@ -16,12 +23,16 @@ const TaskNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: true,
-        header: () => <TaskNavigatorHeader />,
+        headerShown: false,
       }}
     >
       <Stack.Screen name="AllTasksRoute" component={TasksScreen} />
-      <Stack.Screen name="TaskDetailsRoute" component={TaskDetailsScreen} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="TaskDetailsRoute"
+        component={TaskDetailsScreen}
+      />
+      <Stack.Screen name="StoryTasksRoute" component={StoryTasksComponent} />
     </Stack.Navigator>
   );
 };
