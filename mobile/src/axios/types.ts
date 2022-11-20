@@ -36,6 +36,11 @@ export type TasksWithMetadata = Task & {
 export type TaskCompletion = {
   date_completed: string;
   verified: boolean;
+  users_permissions_user: ApiSingularResponse<User>;
+  task: ApiSingularResponse<Task>;
+  media: ApiSingularResponse<Media>;
+  comments: ApiResponse<any>;
+  liked_by: ApiResponse<User>;
 };
 
 export type Comment = {

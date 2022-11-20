@@ -35,7 +35,9 @@ export const getTasksWithCompletions = async (userId: number) => {
 };
 
 export const getTaskCompletions = async () => {
-  const response = await configuredAxios.get<ApiResponse<TaskCompletion>>('/user-tasks');
+  const response = await configuredAxios.get<ApiResponse<TaskCompletion>>('/user-tasks', {
+    params: { populate: '*' },
+  });
   return response.data;
 };
 
