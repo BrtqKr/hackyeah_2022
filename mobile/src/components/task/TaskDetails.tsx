@@ -1,8 +1,9 @@
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useQuery } from '@tanstack/react-query';
 import * as ImagePicker from 'expo-image-picker';
-import { ImagePickerResult } from 'expo-image-picker/src/ImagePicker.types';
-import React, { useState } from 'react';
+import { ImagePickerResult } from 'expo-image-picker';
+import React, { ComponentPropsWithoutRef, useState } from 'react';
 import {
   Image,
   ImageBackground,
@@ -14,16 +15,69 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useAuthContext } from '../../auth/AuthProvider';
+import * as Api from '../../axios/api';
+import { ApiResponse, TasksWithMetadata } from '../../axios/types';
+import { AppCoreStackParamList } from '../../navigation/navigators/AppCoreNavigator/AppCoreNavigator';
+import { TaskStatus } from '../../navigation/navigators/AppCoreNavigator/TasksNavigator/types';
 import { Colors } from '../../theme/Colors';
 import { radiusMap } from '../../theme/Constants';
 import { ScreenWrapper } from '../shared';
 
 const IMAGE_SIDE = 140;
 
-export const TaskDetails = (task: any) => {
+type Route = RouteProp<AppCoreStackParamList, 'TaskDetailsRoute'>;
+
+type ArrayElement<ArrayType extends readonly unknown[]> =
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+
+type IconName = Pick<ComponentPropsWithoutRef<typeof Feather>, 'name'>;
+
+const statusToImageStyle: Record<TaskStatus, IconName & { color: string; iconText: string }> = {
+  failed: {
+    name: 'slash',
+    color: Colors.Primary1,
+    iconText: 'Overdue',
+  },
+  inProgress: {
+    name: 'loader',
+    color: '#eab308',
+    iconText: 'In progress',
+  },
+  completed: {
+    name: 'check-circle',
+    color: Colors.Success1,
+    iconText: 'Done',
+  },
+};
+
+const getStatus = (item: ArrayElement<ApiResponse<TasksWithMetadata>['data']>): TaskStatus => {
+  if (item.attributes.task_completions.data.length !== 0) return 'completed';
+  const unixTimeZero = Date.parse(item.attributes.date_finished);
+  if (unixTimeZero < Date.now()) {
+    return 'failed';
+  }
+  return 'inProgress';
+};
+
+export const TaskDetails = () => {
   const [image, setImage] = useState<string | undefined>(undefined);
   const { goBack } = useNavigation();
   const { top } = useSafeAreaInsets();
+
+  const route = useRoute<Route>();
+  const { user } = useAuthContext();
+
+  const { data, isLoading } = useQuery(
+    ['getTaskCompletions', { id: 1 }], // query key
+    () => Api.getTasksWithCompletions(user?.id || 0)
+  );
+
+  console.warn('ROUTE ', route.params.taskId);
+  const selectedTask = data?.data.filter((task) => task.id === route.params.taskId)[0];
+  const { iconText, ...iconProps } = selectedTask
+    ? statusToImageStyle[getStatus(selectedTask)]
+    : { iconText: '' };
 
   const pickImage = async () => {
     const result: ImagePickerResult = await ImagePicker.launchImageLibraryAsync({
@@ -37,6 +91,10 @@ export const TaskDetails = (task: any) => {
       setImage(result.assets[0].uri);
     }
   };
+
+  if (!isLoading && !selectedTask) {
+    return null;
+  }
 
   const addCompletedTask = async () => {
     console.log(image);
@@ -62,7 +120,7 @@ export const TaskDetails = (task: any) => {
               <Image
                 style={styles.avatar}
                 source={{
-                  uri: 'https://pics.freeicons.io/uploads/icons/png/3158397191660787374-512.png',
+                  uri: 'http://188.68.236.47' + selectedTask?.attributes.media.data?.attributes.url,
                 }}
               />
               <View
@@ -202,7 +260,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     marginTop: -IMAGE_SIDE / 3,
     marginLeft: 24,
-    backgroundColor: '#86efac',
+    // backgroundColor: '#86efac',
     resizeMode: 'cover',
   },
   taskName: {

@@ -13,22 +13,34 @@ export type User = {
   Surname: null;
 };
 
+export type Media = {
+  name: string;
+  width: string;
+  height: string;
+  url: string;
+};
+
 export type UserWithId = User & {
   id: number;
 };
 
-export type TaskWithUser = Task & {
-  users_permissions_user: {
-    data: {
-      id: number;
-      attributes: User;
-    };
-  };
+export type TasksWithMetadata = Task & {
+  task_completions: ApiResponse<
+    TaskCompletion & {
+      users_permissions_user: ApiSingularResponse<User>;
+    }
+  >;
+  media: ApiSingularResponse<Media>;
 };
 
 export type TaskCompletion = {
   date_completed: string;
   verified: boolean;
+  users_permissions_user: ApiSingularResponse<User>;
+  task: ApiSingularResponse<Task>;
+  media: ApiSingularResponse<Media>;
+  comments: ApiResponse<any>;
+  liked_by: ApiResponse<User>;
 };
 
 export type Comment = {
@@ -41,4 +53,11 @@ export type ApiResponse<T> = {
     attributes: T;
     id: number;
   }[];
+};
+
+export type ApiSingularResponse<T> = {
+  data: {
+    attributes: T;
+    id: number;
+  } | null;
 };

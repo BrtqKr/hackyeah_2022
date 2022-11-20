@@ -64,8 +64,6 @@ const CommentsScreen = () => {
     onError: (error: AxiosError) => console.log({ error: error.name }),
   });
 
-  console.log({ status, data: data?.data });
-
   return (
     <ScreenWrapper>
       <StatusBar barStyle="dark-content" />

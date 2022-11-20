@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { Colors } from '../../../../theme/Colors';
 import { radiusMap } from '../../../../theme/Constants';
 import { Feather } from '@expo/vector-icons';
@@ -16,9 +16,18 @@ type Navigation = StackNavigationProp<TaskNavigatorStackParamList>;
 export type TaskNavigatorHeaderProps = {
   route: 'AllTasksRoute' | 'StoryTasksRoute';
   setRoute: (route: 'AllTasksRoute' | 'StoryTasksRoute') => void;
+  allTasks: number;
+  finishedTasks: number;
+  loading: boolean;
 };
 
-export default function TaskNavigatorHeader({ route, setRoute }: TaskNavigatorHeaderProps) {
+export default function TaskNavigatorHeader({
+  route,
+  setRoute,
+  allTasks,
+  finishedTasks,
+  loading,
+}: TaskNavigatorHeaderProps) {
   const { top } = useSafeAreaInsets();
   const { navigate } = useNavigation<Navigation>();
 
@@ -39,7 +48,11 @@ export default function TaskNavigatorHeader({ route, setRoute }: TaskNavigatorHe
       <View style={styles.calendar}>
         <Feather name="clipboard" size={sizeMap.XLarge * 4} color="#fff" />
         <View>
-          <Text style={styles.counter}>12/25</Text>
+          {loading ? (
+            <ActivityIndicator size={'large'} />
+          ) : (
+            <Text style={styles.counter}>{`${finishedTasks}/${allTasks}`}</Text>
+          )}
           <Text style={styles.subtitle}>Tasks done</Text>
         </View>
         <View style={styles.switchTasksPanel}>

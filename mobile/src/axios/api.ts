@@ -1,26 +1,43 @@
 import { AxiosResponse } from 'axios';
 import { configuredAxios } from './config';
-import { ApiResponse, Task, TaskCompletion, TaskWithUser } from './types';
+import { ApiResponse, Task, TaskCompletion, TasksWithMetadata } from './types';
 
 export const getTasks = async () => {
   const response = await configuredAxios.get<ApiResponse<Task>>('/TASKS');
   return response.data;
 };
 
-export const getMyTasks = async (userId: number) => {
-  const response = await configuredAxios.get<ApiResponse<TaskWithUser>>('/user-tasks', {
+export const getTasksWithCompletions = async (userId: number) => {
+  const response = await configuredAxios.get<ApiResponse<TasksWithMetadata>>('/tasks', {
     params: {
-      'populate[0]': 'users_permissions_user',
+      'populate[task_completions][populate][0]': 'users_permissions_user',
+      'populate': 'media',
     },
   });
   const data = response.data;
+  const filteredData = data.data.map((task) => {
+    const completions = task.attributes.task_completions.data.filter((completion) => {
+      return completion.attributes.users_permissions_user.data?.id === userId;
+    });
+    return {
+      ...task,
+      attributes: {
+        ...task.attributes,
+        task_completions: {
+          data: completions,
+        },
+      },
+    };
+  });
   return {
-    data: data.data.filter((item) => item.attributes.users_permissions_user.data.id === userId),
+    data: filteredData,
   };
 };
 
 export const getTaskCompletions = async () => {
-  const response = await configuredAxios.get<ApiResponse<TaskCompletion>>('/user-tasks');
+  const response = await configuredAxios.get<ApiResponse<TaskCompletion>>('/user-tasks', {
+    params: { populate: '*' },
+  });
   return response.data;
 };
 

@@ -1,6 +1,4 @@
 import { Feather, FontAwesome } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -12,7 +10,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { AppCoreStackParamList } from '../../navigation/navigators/AppCoreNavigator/AppCoreNavigator';
+import { useAuthContext } from '../../auth/AuthProvider';
+import { TaskCompletion } from '../../axios/types';
 import { Colors } from '../../theme/Colors';
 import { radiusMap } from '../../theme/Constants';
 import { sizeMap } from '../../theme/Iconography';
@@ -21,12 +20,15 @@ import BlurWrapper from '../shared/BlurWrapper';
 
 const IMAGE_RADIUS = radiusMap.XLarge - 12;
 
-type Navigation = StackNavigationProp<AppCoreStackParamList>;
-
-export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: any }) => {
-  const { navigate } = useNavigation<Navigation>();
-
+export const FeedTaskTile = ({
+  tileIndex,
+  taskCompletion,
+}: {
+  tileIndex: number;
+  taskCompletion: TaskCompletion;
+}) => {
   const animationProgress = useSharedValue(1.7);
+  const { user } = useAuthContext();
 
   const fireAnimation = () => {
     setTimeout(() => {
@@ -70,14 +72,14 @@ export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: 
                 <Image
                   style={styles.avatar}
                   source={{
-                    uri: task?.author?.avatarUrl ?? undefined,
+                    uri: taskCompletion.users_permissions_user.data?.attributes.email ?? undefined,
                   }}
                 />
               </View>
               <Image
-                style={{ aspectRatio: 1 }}
+                style={{ aspectRatio: 1, backgroundColor: Colors.Dark3 }}
                 source={{
-                  uri: task.imageUrl,
+                  uri: 'http://188.68.236.47' + taskCompletion.media.data?.attributes.url,
                 }}
               />
               <BlurWrapper style={styles.blurWrapper}>
@@ -90,7 +92,7 @@ export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: 
                     }}
                   >
                     <Text style={[Typography.text2, { fontWeight: 'bold', color: Colors.White1 }]}>
-                      {task.title}
+                      {taskCompletion.task.data?.attributes.title}
                     </Text>
                     <View
                       style={{
@@ -99,7 +101,11 @@ export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: 
                     >
                       <TouchableOpacity onPress={() => {}}>
                         <FontAwesome
-                          name={task.likedByYou ? 'heart-o' : 'heart'}
+                          name={
+                            taskCompletion.liked_by.data.some((el) => el.id == user?.id)
+                              ? 'heart'
+                              : 'heart-o'
+                          }
                           size={sizeMap.Regular}
                           color={Colors.White1}
                           style={{ marginRight: 8 }}
@@ -119,7 +125,7 @@ export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: 
                   </View>
                   <View style={{ marginTop: 12 }}>
                     <Text style={[Typography.text3, { color: Colors.White1 }]} ellipsizeMode="clip">
-                      {task.description}
+                      {taskCompletion.task.data?.attributes.description}
                     </Text>
                   </View>
                 </View>

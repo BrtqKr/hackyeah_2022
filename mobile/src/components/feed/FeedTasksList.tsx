@@ -1,61 +1,26 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import * as Api from '../../axios/api';
 import { Colors } from '../../theme/Colors';
 import { FeedTasksHeader } from './FeedTasksHeader';
 import { FeedTaskTile } from './FeedTaskTile';
-const FEED_TASKS = [
-  {
-    title: 'Run 100km',
-    imageUrl:
-      'https://cdn.sanity.io/images/y346iw48/production/a59cbb8951fa663a7ffeef5324e1cf7037a70b57-4000x2250.jpg',
-    id: '1',
-    author: {
-      name: 'Patrick Bateman',
-      avatarUrl: 'https://i1.sndcdn.com/avatars-000529882611-ht5r1v-t500x500.jpg',
-    },
-    likedByYou: false,
-    description:
-      'Lorem ipsum anifqworjqw werij qwrio jwqio rjqweio rqwji roqwjir wqeji rweqji rqewijreiwqrjworjwq weqj rowiq jqwio jrioqwe jriqweo rjqiwoerj qwoijrqweiorjq woirqjwrioqwej roiqw',
-  },
-  {
-    title: 'Plant a tree',
-    imageUrl:
-      'https://cdn.sanity.io/images/y346iw48/production/a59cbb8951fa663a7ffeef5324e1cf7037a70b57-4000x2250.jpg',
-    id: '2',
-    author: {
-      name: 'Patrick Bateman',
-      avatarUrl: 'https://i1.sndcdn.com/avatars-000529882611-ht5r1v-t500x500.jpg',
-    },
-    likedByYou: true,
-    description:
-      'Lorem ipsum anifqworjqw werij qwrio jwqio rjqweio rqwji roqwjir wqeji rweqji rqewijreiwqrjworjwq weqj rowiq jqwio jrioqwe jriqweo rjqiwoerj qwoijrqweiorjq woirqjwrioqwej roiqw',
-  },
-  {
-    title: 'Plant a tree',
-    imageUrl:
-      'https://cdn.sanity.io/images/y346iw48/production/a59cbb8951fa663a7ffeef5324e1cf7037a70b57-4000x2250.jpg',
-    id: '3',
-    author: {
-      name: 'Patrick Bateman',
-      avatarUrl: 'https://i1.sndcdn.com/avatars-000529882611-ht5r1v-t500x500.jpg',
-    },
-    description:
-      'Lorem ipsum anifqworjqw werij qwrio jwqio rjqweio rqwji roqwjir wqeji rweqji rqewijreiwqrjworjwq weqj rowiq jqwio jrioqwe jriqweo rjqiwoerj qwoijrqweiorjq woirqjwrioqwej roiqw',
-  },
-  { title: 'Plant a tree', id: '4' },
-  { title: 'Plant a tree', id: '5' },
-  { title: 'Plant a tree', id: '6' },
-  { title: 'Plant a tree', id: '7' },
-  { title: 'Plant a tree', id: '8' },
-];
 
 export const FeedTasksList = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
+  const { status, error, data } = useQuery(
+    [], // query key
+    Api.getTaskCompletions
+  );
+  ({});
+
   return (
     <FlatList
-      data={FEED_TASKS}
-      renderItem={({ item, index }) => <FeedTaskTile tileIndex={index} {...item} />}
+      data={data?.data ?? []}
+      renderItem={({ item, index }) => (
+        <FeedTaskTile tileIndex={index} taskCompletion={item?.attributes} />
+      )}
       keyExtractor={(item) => item.id}
       refreshing={isRefreshing}
       refreshControl={
@@ -75,9 +40,6 @@ export const FeedTasksList = () => {
       style={styles.list}
       contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={false}
-      //   onEndReached={() => {
-      //     characters?.pageInfo.hasNextPage && fetchMore();
-      //   }}
     />
   );
 };
@@ -95,5 +57,6 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
     width: '100%',
     backgroundColor: Colors.White1,
+    minHeight: '100%',
   },
 });

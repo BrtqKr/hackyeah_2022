@@ -11,7 +11,7 @@ export type AppCoreStackParamList = {
   BottomNavigatorRoute: undefined;
   EditProfileRoute: undefined;
   AlertsRoute: undefined;
-  TaskDetailsRoute: { taskId: string };
+  TaskDetailsRoute: { taskId: number };
   CommentsRoute: { taskId: string };
 };
 
