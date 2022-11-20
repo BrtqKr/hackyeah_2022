@@ -5,7 +5,6 @@ import TaskNavigatorHeader from './TaskNavigatorHeader';
 export const TaskDetailsScreen = (task: any) => {
   return (
     <>
-      <TaskNavigatorHeader />
       <TaskDetails task={{}} />
     </>
   );

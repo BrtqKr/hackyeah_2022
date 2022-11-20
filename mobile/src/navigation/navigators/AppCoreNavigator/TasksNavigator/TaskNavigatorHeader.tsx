@@ -13,16 +13,14 @@ import { StackNavigationProp } from '@react-navigation/stack';
 
 type Navigation = StackNavigationProp<TaskNavigatorStackParamList>;
 
-export default function TaskNavigatorHeader() {
+export type TaskNavigatorHeaderProps = {
+  route: 'AllTasksRoute' | 'StoryTasksRoute';
+  setRoute: (route: 'AllTasksRoute' | 'StoryTasksRoute') => void;
+};
+
+export default function TaskNavigatorHeader({ route, setRoute }: TaskNavigatorHeaderProps) {
   const { top } = useSafeAreaInsets();
   const { navigate } = useNavigation<Navigation>();
-  const [currentRoute, setCurrentRoute] = useState<'AllTasksRoute' | 'StoryTasksRoute'>(
-    'AllTasksRoute'
-  );
-
-  useEffect(() => {
-    navigate(currentRoute);
-  }, [currentRoute]);
 
   const HEADER_HEIGHT = top + 275;
   const TOP_OFFSET = top + 16;
@@ -46,12 +44,12 @@ export default function TaskNavigatorHeader() {
         </View>
         <View style={styles.switchTasksPanel}>
           <View style={{ padding: 10 }}>
-            <TouchableOpacity onPress={() => setCurrentRoute('AllTasksRoute')}>
+            <TouchableOpacity onPress={() => setRoute('AllTasksRoute')}>
               <View
                 style={[
                   { alignItems: 'center', flexGrow: 1 },
                   styles.taskKindButton,
-                  currentRoute === 'AllTasksRoute' && { backgroundColor: 'rgba(255,255,255, 0.3)' },
+                  route === 'AllTasksRoute' && { backgroundColor: 'rgba(255,255,255, 0.3)' },
                 ]}
               >
                 <Text style={[Typography.text2, { color: Colors.White1 }]}>
@@ -67,12 +65,12 @@ export default function TaskNavigatorHeader() {
             </TouchableOpacity>
           </View>
           <View style={{ padding: 10 }}>
-            <TouchableOpacity onPress={() => setCurrentRoute('StoryTasksRoute')}>
+            <TouchableOpacity onPress={() => setRoute('StoryTasksRoute')}>
               <View
                 style={[
                   { alignItems: 'center', flexGrow: 1 },
                   styles.taskKindButton,
-                  currentRoute === 'StoryTasksRoute' && {
+                  route === 'StoryTasksRoute' && {
                     backgroundColor: 'rgba(255,255,255, 0.3)',
                   },
                 ]}
