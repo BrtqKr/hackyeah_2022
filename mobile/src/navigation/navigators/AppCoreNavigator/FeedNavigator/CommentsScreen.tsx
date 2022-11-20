@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+<<<<<<< HEAD
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useEffect } from 'react';
@@ -6,6 +7,9 @@ import { Button, Text, View } from 'react-native';
 import { useAuthContext } from '../../../../auth/AuthProvider';
 import * as Api from '../../../../axios/api';
 import * as ApiTypes from '../../../../axios/types';
+=======
+import { Button, StatusBar, Text, View } from 'react-native';
+>>>>>>> main
 
 const CommentsScreen = () => {
   const { navigate } = useNavigation();
@@ -29,6 +33,7 @@ const CommentsScreen = () => {
 
   return (
     <View>
+      <StatusBar barStyle="light-content" />
       <Text>Comments SCREEN HEADER</Text>
       <View style={{ flex: 1, justifyContent: 'center' }}></View>
       <Button onPress={() => mutate()} title="Test" />

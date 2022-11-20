@@ -37,6 +37,12 @@
         "videos",
         "audios"
       ]
+    },
+    "task_completions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-task.user-task",
+      "mappedBy": "task"
     }
   }
 }
