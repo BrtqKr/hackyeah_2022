@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { configuredAxios } from './config';
-import { ApiResponse, Task, TaskCompletion, TaskWithUser } from './types';
+import {ApiResponse, Task, TaskCompletion, TaskWithUser} from './types';
 
 export const getTasks = async () => {
   const response = await configuredAxios.get<ApiResponse<Task>>('/TASKS');
@@ -20,7 +20,7 @@ export const getMyTasks = async (userId: number) => {
 };
 
 export const getTaskCompletions = async () => {
-  const response = await configuredAxios.get<ApiResponse<TaskCompletion>>('/user-tasks');
+  const response = await configuredAxios.get<ApiResponse<TaskCompletion>>('/user-tasks',{ params: { populate: '*' }} );
   return response.data;
 };
 
