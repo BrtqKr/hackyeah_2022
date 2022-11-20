@@ -1,7 +1,15 @@
 import { Feather, FontAwesome } from '@expo/vector-icons';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Animated, {
+  Easing,
+  Extrapolation,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { Colors } from '../../theme/Colors';
 import { radiusMap } from '../../theme/Constants';
 import { sizeMap } from '../../theme/Iconography';
@@ -11,9 +19,36 @@ import BlurWrapper from '../shared/BlurWrapper';
 const IMAGE_HEIGHT = 200;
 const IMAGE_RADIUS = radiusMap.XLarge - 12;
 
-export const FeedTaskTile = (task: any) => {
+export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: any }) => {
+  const animationProgress = useSharedValue(1.7);
+
+  const fireAnimation = () => {
+    setTimeout(() => {
+      animationProgress.value = withTiming(2, { duration: 500, easing: Easing.out(Easing.quad) });
+    }, 500);
+  };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      fireAnimation();
+    }, 200 + tileIndex * 500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const animatedRotation = useAnimatedStyle(
+    () => ({
+      opacity: interpolate(animationProgress.value, [1.8, 2], [0, 1], Extrapolation.CLAMP),
+      transform: [
+        {
+          translateY: -312 * (2 - animationProgress.value),
+        },
+      ],
+    }),
+    []
+  );
+
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, animatedRotation]}>
       <View style={styles.userInfoContainer}>
         <Image
           style={styles.avatar}
@@ -56,7 +91,7 @@ export const FeedTaskTile = (task: any) => {
           </BlurWrapper>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
