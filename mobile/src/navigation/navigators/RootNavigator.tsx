@@ -18,7 +18,7 @@ const RootNavigator = () => {
         headerShown: false,
       }}
     >
-      {isSignedIn ? (
+      {true ? (
         <Stack.Screen name="AppCoreRoute" component={AppCoreNavigator} />
       ) : (
         <Stack.Screen name="AuthRoute" component={AuthNavigator} />

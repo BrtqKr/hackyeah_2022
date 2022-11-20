@@ -13,47 +13,49 @@ const IMAGE_RADIUS = radiusMap.XLarge - 12;
 
 export const FeedTaskTile = (task: any) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.userInfoContainer}>
-        <Image
-          style={styles.avatar}
-          source={{
-            uri: task?.author?.avatarUrl ?? undefined,
-          }}
-        />
-        <View style={{}}>
-          <Text style={[Typography.text3, styles.userName]}>{task?.author?.name}</Text>
-          <Text style={[Typography.text4, styles.userRole]}>CEO</Text>
-        </View>
-      </View>
-
-      <View style={{ padding: 12 }}>
-        <View style={{ overflow: 'hidden', borderRadius: IMAGE_RADIUS }}>
+    <View style={{ paddingHorizontal: 24 }}>
+      <View style={styles.container}>
+        <View style={styles.userInfoContainer}>
           <Image
-            style={{ height: IMAGE_HEIGHT }}
+            style={styles.avatar}
             source={{
-              uri: task.imageUrl,
+              uri: task?.author?.avatarUrl ?? undefined,
             }}
           />
-          <BlurWrapper style={styles.blurWrapper}>
-            <Text style={[Typography.text2, { fontWeight: 'bold', color: Colors.White1 }]}>
-              {task.title}
-            </Text>
-            <View style={{ flexDirection: 'row' }}>
-              <TouchableOpacity onPress={() => {}}>
-                <FontAwesome
-                  name={task.likedByYou ? 'heart-o' : 'heart'}
-                  size={sizeMap.Regular}
-                  color={Colors.White1}
-                  style={{ marginRight: 8 }}
-                />
-              </TouchableOpacity>
+          <View style={{}}>
+            <Text style={[Typography.text3, styles.userName]}>{task?.author?.name}</Text>
+            <Text style={[Typography.text4, styles.userRole]}>CEO</Text>
+          </View>
+        </View>
 
-              <TouchableOpacity onPress={() => {}}>
-                <Feather name={'message-circle'} size={sizeMap.Regular} color={Colors.White1} />
-              </TouchableOpacity>
-            </View>
-          </BlurWrapper>
+        <View style={{ padding: 12 }}>
+          <View style={{ overflow: 'hidden', borderRadius: IMAGE_RADIUS }}>
+            <Image
+              style={{ height: IMAGE_HEIGHT }}
+              source={{
+                uri: task.imageUrl,
+              }}
+            />
+            <BlurWrapper style={styles.blurWrapper}>
+              <Text style={[Typography.text2, { fontWeight: 'bold', color: Colors.White1 }]}>
+                {task.title}
+              </Text>
+              <View style={{ flexDirection: 'row' }}>
+                <TouchableOpacity onPress={() => {}}>
+                  <FontAwesome
+                    name={task.likedByYou ? 'heart-o' : 'heart'}
+                    size={sizeMap.Regular}
+                    color={Colors.White1}
+                    style={{ marginRight: 8 }}
+                  />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => {}}>
+                  <Feather name={'message-circle'} size={sizeMap.Regular} color={Colors.White1} />
+                </TouchableOpacity>
+              </View>
+            </BlurWrapper>
+          </View>
         </View>
       </View>
     </View>

@@ -13,6 +13,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { loginUser } from '../../../auth/api';
 import { useAuthContext } from '../../../auth/AuthProvider';
 import { LoginInput } from '../../../auth/types';
 import ScreenWrapper from '../../../components/shared/ScreenWrapper';

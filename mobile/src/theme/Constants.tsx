@@ -1,5 +1,6 @@
 enum Radius {
   Circle = 'Circle',
+  XXLarge = 'XXLarge',
   XLarge = 'XLarge',
   Large = 'Large',
   Regular = 'Regular',
@@ -8,6 +9,7 @@ enum Radius {
 
 export const radiusMap: { [key in Radius]: number } = {
   Circle: 99999,
+  XXLarge: 40,
   XLarge: 36,
   Large: 16,
   Regular: 12,
