@@ -1,10 +1,10 @@
 import React from 'react';
 import TaskDetails from '../../../../components/task/TaskDetails';
 
-export const TaskDetailsScreen = () => {
+export const TaskDetailsScreen = ( { taskId } : { taskId: number }) => {
   return (
     <>
-      <TaskDetails />
+      <TaskDetails taskId={taskId}/>
     </>
   );
 };

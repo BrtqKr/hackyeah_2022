@@ -60,7 +60,7 @@ const getStatus = (item: ArrayElement<ApiResponse<TasksWithMetadata>['data']>): 
   return 'inProgress';
 };
 
-export const TaskDetails = () => {
+export const TaskDetails = ({ taskId } : { taskId: number }) => {
   const [image, setImage] = useState<string | undefined>(undefined);
   const { goBack } = useNavigation();
   const { top } = useSafeAreaInsets();
@@ -69,7 +69,7 @@ export const TaskDetails = () => {
   const { user } = useAuthContext();
 
   const { data, isLoading } = useQuery(
-    ['getTaskCompletions', { id: 1 }], // query key
+    ['getTaskCompletions', { id: taskId }], // query key
     () => Api.getTasksWithCompletions(user?.id || 0)
   );
 
@@ -144,7 +144,7 @@ export const TaskDetails = () => {
                   marginBottom: 12,
                 }}
               >
-                <Text>25th November 2022</Text>
+                <Text>{selectedTask?.attributes?.date_finished}</Text>
               </View>
 
               <View
@@ -153,7 +153,7 @@ export const TaskDetails = () => {
                   marginBottom: 4,
                 }}
               >
-                <Text style={styles.taskNameText}>Water the plants</Text>
+                <Text style={styles.taskNameText}>{selectedTask?.attributes?.title}</Text>
               </View>
               <View style={styles.taskDescription}>
                 <Text
@@ -166,9 +166,7 @@ export const TaskDetails = () => {
                     },
                   ]}
                 >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  {selectedTask?.attributes?.description}
                 </Text>
               </View>
             </View>
@@ -204,7 +202,7 @@ export const TaskDetails = () => {
               disabled={image == undefined}
               onPress={addCompletedTask}
             >
-              <View style={[styles.button, !image && { backgroundColor: Colors.PrimaryDark }]}>
+              <View style={[styles.button, !image && { backgroundColor: Colors.Secondary3 }]}>
                 <Text style={[styles.buttonTitle, !image && { color: '#B5B5B5' }]}>
                   Zatwierdź zadanie
                 </Text>
