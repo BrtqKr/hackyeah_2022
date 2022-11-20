@@ -1,4 +1,6 @@
 import { Feather, FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -10,6 +12,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { AppCoreStackParamList } from '../../navigation/navigators/AppCoreNavigator/AppCoreNavigator';
 import { Colors } from '../../theme/Colors';
 import { radiusMap } from '../../theme/Constants';
 import { sizeMap } from '../../theme/Iconography';
@@ -18,7 +21,11 @@ import BlurWrapper from '../shared/BlurWrapper';
 
 const IMAGE_RADIUS = radiusMap.XLarge - 12;
 
+type Navigation = StackNavigationProp<AppCoreStackParamList>;
+
 export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: any }) => {
+  const { navigate } = useNavigation<Navigation>();
+
   const animationProgress = useSharedValue(1.7);
 
   const fireAnimation = () => {
@@ -99,7 +106,9 @@ export const FeedTaskTile = ({ tileIndex, ...task }: { tileIndex: number; task: 
                         />
                       </TouchableOpacity>
 
-                      <TouchableOpacity onPress={() => {}}>
+                      <TouchableOpacity
+                        onPress={() => navigate('CommentsRoute', { taskId: 'taskID' })}
+                      >
                         <Feather
                           name={'message-circle'}
                           size={sizeMap.Regular}

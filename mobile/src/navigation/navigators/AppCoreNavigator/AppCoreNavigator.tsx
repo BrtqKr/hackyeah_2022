@@ -1,11 +1,10 @@
 import { Feather } from '@expo/vector-icons';
 import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
-import { Text } from 'react-native';
 import { Colors } from '../../../theme/Colors';
-import { Typography } from '../../../theme/Typography/Typography';
 import { EditProfileScreen } from '../ProfileNavigator/EditProfileScreen';
 import AlertsScreen from './AlertsScreen';
 import BottomNavigator from './BottomNavigator';
+import CommentsScreen from './FeedNavigator/CommentsScreen';
 import TaskDetailsScreen from './TasksNavigator/TaskDetailsScreen';
 
 export type AppCoreStackParamList = {
@@ -13,11 +12,12 @@ export type AppCoreStackParamList = {
   EditProfileRoute: undefined;
   AlertsRoute: undefined;
   TaskDetailsRoute: { taskId: string };
+  CommentsRoute: { taskId: string };
 };
 
 export const headerOptions: StackNavigationOptions = {
-  headerTitle: ({ children }) => <Text style={Typography.text1}>{children}</Text>,
-  headerBackImage: () => <Feather name="arrow-left" size={32} color={Colors.Secondary3} />,
+  //   headerTitle: ({ children }) => <Text style={Typography.text1}>{children}</Text>,
+  headerBackImage: () => <Feather name="chevron-left" size={32} color={Colors.Secondary3} />,
   headerTitleAlign: 'center',
   headerStyle: {
     borderWidth: 0,
@@ -27,6 +27,7 @@ export const headerOptions: StackNavigationOptions = {
   headerLeftContainerStyle: {
     paddingLeft: 16,
   },
+  headerTitle: '',
   headerBackTitleVisible: false,
 };
 
@@ -46,11 +47,8 @@ const AppCoreNavigator = () => {
         options={{ headerShown: true, ...headerOptions }}
       />
       <Stack.Screen name="AlertsRoute" component={AlertsScreen} />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="TaskDetailsRoute"
-        component={TaskDetailsScreen}
-      />
+      <Stack.Screen name="TaskDetailsRoute" component={TaskDetailsScreen} />
+      <Stack.Screen name="CommentsRoute" component={CommentsScreen} />
     </Stack.Navigator>
   );
 };
