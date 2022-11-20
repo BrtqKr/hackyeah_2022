@@ -1,10 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import TasksScreen from './TasksScreen';
-import TaskDetailsScreen from './TaskDetailsScreen';
+import React from 'react';
 
 export type TaskNavigatorStackParamList = {
-  AllTasksRoute: undefined;
-  TaskDetailsRoute: { taskId: string };
+  TasksRoute: undefined;
 };
 
 const TaskNavigator = () => {
@@ -16,8 +15,7 @@ const TaskNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="AllTasksRoute" component={TasksScreen} />
-      <Stack.Screen name="TaskDetailsRoute" component={TaskDetailsScreen} />
+      <Stack.Screen name="TasksRoute" component={TasksScreen} />
     </Stack.Navigator>
   );
 };

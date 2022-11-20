@@ -32,8 +32,6 @@ const LEADERBOARD_USERS = [
 export const FeedTasksHeader = (task: any) => {
   const { top } = useSafeAreaInsets();
 
-  //   const HEADER_HEIGHT = top + 210;
-
   return (
     <View style={[styles.container]}>
       <View style={styles.leaderboardContainer}>

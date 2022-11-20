@@ -4,13 +4,15 @@ import { Text } from 'react-native';
 import { Colors } from '../../../theme/Colors';
 import { Typography } from '../../../theme/Typography/Typography';
 import { EditProfileScreen } from '../ProfileNavigator/EditProfileScreen';
-import BottomNavigator from './BottomNavigator';
 import AlertsScreen from './AlertsScreen';
+import BottomNavigator from './BottomNavigator';
+import TaskDetailsScreen from './TasksNavigator/TaskDetailsScreen';
 
 export type AppCoreStackParamList = {
   BottomNavigatorRoute: undefined;
   EditProfileRoute: undefined;
   AlertsRoute: undefined;
+  TaskDetailsRoute: { taskId: string };
 };
 
 export const headerOptions: StackNavigationOptions = {
@@ -44,6 +46,11 @@ const AppCoreNavigator = () => {
         options={{ headerShown: true, ...headerOptions }}
       />
       <Stack.Screen name="AlertsRoute" component={AlertsScreen} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="TaskDetailsRoute"
+        component={TaskDetailsScreen}
+      />
     </Stack.Navigator>
   );
 };

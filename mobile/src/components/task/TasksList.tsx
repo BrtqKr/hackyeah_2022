@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React, { ComponentPropsWithoutRef, useEffect } from 'react';
 import { FlatList, Text, View, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -9,6 +9,8 @@ import { TaskStatus } from '../../navigation/navigators/AppCoreNavigator/TasksNa
 import { sizeMap } from '../../theme/Iconography';
 import { ScreenWrapper } from '../shared';
 import { Colors } from '../../theme/Colors';
+import { Typography } from '../../theme/Typography/Typography';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 interface MockImage {
   url: string;
@@ -108,18 +110,33 @@ const Card = ({ index }: { index: number }) => {
     </TouchableOpacity>
   );
 };
+
 const TasksList = () => {
+  const animationProgress = useSharedValue(0);
+
+  useEffect(() => {
+    animationProgress.value = withTiming(1, { duration: 1000 });
+  }, []);
+
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      opacity: animationProgress.value,
+    };
+  }, []);
+
   return (
-    <ScreenWrapper style={styles.screenWraper} safeArea>
-      <Text>Twoje trwające zadania</Text>
-      <FlatList
-        style={styles.flatList}
-        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        numColumns={2}
-        renderItem={({ index }) => <Card index={index} />}
-        columnWrapperStyle={styles.flatListColumn}
-        contentContainerStyle={styles.flatListContainer}
-      />
+    <ScreenWrapper style={styles.screenWraper}>
+      <Animated.View style={animatedStyles}>
+        <Text style={Typography.text1}>Your ongoing tasks</Text>
+        <FlatList
+          style={styles.flatList}
+          data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+          numColumns={2}
+          renderItem={({ index }) => <Card index={index} />}
+          columnWrapperStyle={styles.flatListColumn}
+          contentContainerStyle={styles.flatListContainer}
+        />
+      </Animated.View>
     </ScreenWrapper>
   );
 };
@@ -150,7 +167,7 @@ const styles = StyleSheet.create({
   flatListContainer: { paddingBottom: 120, paddingTop: 30 },
   flatListColumn: { justifyContent: 'center' },
   thumbnailText: { textAlignVertical: 'center', textAlign: 'center', color: Colors.White1 },
-  screenWraper: { alignItems: 'center' },
+  screenWraper: { alignItems: 'center', paddingTop: 16 },
 });
 
 export default TasksList;
