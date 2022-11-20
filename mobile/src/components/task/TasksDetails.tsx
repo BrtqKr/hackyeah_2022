@@ -1,7 +1,7 @@
+import React, { ComponentPropsWithoutRef, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { ImagePickerResult } from 'expo-image-picker/src/ImagePicker.types';
-import React, { useState } from 'react';
 import {
   Image,
   ImageBackground,
@@ -12,13 +12,72 @@ import {
   View,
 } from 'react-native';
 import { Colors } from '../../theme/Colors';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { AppCoreStackParamList } from '../../navigation/navigators/AppCoreNavigator/AppCoreNavigator';
+import { useAuthContext } from '../../auth/AuthProvider';
+import { useQuery } from '@tanstack/react-query';
+import * as Api from '../../axios/api';
+import { ApiResponse, TasksWithMetadata } from '../../axios/types';
+import { TaskStatus } from '../../navigation/navigators/AppCoreNavigator/TasksNavigator/types';
+import { Typography } from '../../theme/Typography/Typography';
+import { sizeMap } from '../../theme/Iconography';
 import { radiusMap } from '../../theme/Constants';
 
 const IMAGE_SIDE = 100;
 const IMAGE_RADIUS = 9999;
 
-export const TaskDetails = (task: any) => {
+type Route = RouteProp<AppCoreStackParamList, 'TaskDetailsRoute'>;
+
+type ArrayElement<ArrayType extends readonly unknown[]> =
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+
+type IconName = Pick<ComponentPropsWithoutRef<typeof Feather>, 'name'>;
+
+const statusToImageStyle: Record<TaskStatus, IconName & { color: string; iconText: string }> = {
+  failed: {
+    name: 'slash',
+    color: Colors.Primary1,
+    iconText: 'Overdue',
+  },
+  inProgress: {
+    name: 'loader',
+    color: '#eab308',
+    iconText: 'In progress',
+  },
+  completed: {
+    name: 'check-circle',
+    color: Colors.Success1,
+    iconText: 'Done',
+  },
+};
+
+const getStatus = (item: ArrayElement<ApiResponse<TasksWithMetadata>['data']>): TaskStatus => {
+  if (item.attributes.task_completions.data.length !== 0) return 'completed';
+  const unixTimeZero = Date.parse(item.attributes.date_finished);
+  if (unixTimeZero < Date.now()) {
+    return 'failed';
+  }
+  return 'inProgress';
+};
+
+export const TaskDetails = () => {
   const [image, setImage] = useState<string | undefined>(undefined);
+  const route = useRoute<Route>();
+  const { user } = useAuthContext();
+
+  const { data, isLoading } = useQuery(
+    ['getTaskCompletions', { id: 1 }], // query key
+    () => Api.getTasksWithCompletions(user?.id || 0)
+  );
+
+  const selectedTask = data?.data.filter((task) => task.id === route.params.taskId)[0];
+  const { iconText, ...iconProps } = selectedTask
+    ? statusToImageStyle[getStatus(selectedTask)]
+    : { iconText: '' };
+
+  if (!isLoading && !selectedTask) {
+    return null;
+  }
 
   const pickImage = async () => {
     const result: ImagePickerResult = await ImagePicker.launchImageLibraryAsync({
@@ -45,9 +104,9 @@ export const TaskDetails = (task: any) => {
           <View style={styles.taskDetails}>
             <View style={styles.taskAvatar}>
               <Image
-                style={{ height: IMAGE_SIDE, width: IMAGE_SIDE }}
+                style={{ height: IMAGE_SIDE, width: IMAGE_SIDE, resizeMode: 'stretch' }}
                 source={{
-                  uri: 'https://pics.freeicons.io/uploads/icons/png/3158397191660787374-512.png',
+                  uri: 'http://188.68.236.47' + selectedTask?.attributes.media.data?.attributes.url,
                 }}
               />
             </View>
@@ -60,15 +119,15 @@ export const TaskDetails = (task: any) => {
                 right: 30,
               }}
             >
-              <Text style={{ paddingRight: 10 }}>In progress</Text>
-              <Feather name="loader" size={24} color="orange" />
+              <Text style={Typography.text2}>{iconText}</Text>
+              <Feather style={{ marginLeft: 4 }} size={sizeMap.Regular} {...iconProps} />
             </View>
             <View
               style={{
                 marginTop: 80,
               }}
             >
-              <Text>25th November 2022</Text>
+              <Text>{selectedTask?.attributes.date_started.substring(0, 10)}</Text>
             </View>
 
             <View
@@ -76,17 +135,10 @@ export const TaskDetails = (task: any) => {
                 marginTop: 10,
               }}
             >
-              <Text style={styles.taskNameText}>Water the plants</Text>
+              <Text style={styles.taskNameText}>{selectedTask?.attributes.title}</Text>
             </View>
             <View style={styles.taskDescription}>
-              <Text style={styles.taskDescriptionText}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.
-              </Text>
+              <Text style={styles.taskDescriptionText}>{selectedTask?.attributes.description}</Text>
             </View>
           </View>
         </View>
@@ -106,9 +158,7 @@ export const TaskDetails = (task: any) => {
                   }}
                 >
                   <Feather name="upload" size={60} color="#B5B5B5" />
-                  <Text style={{ color: '#B5B5B5', fontSize: 12, paddingTop: 6 }}>
-                    Dodaj zdjęcie
-                  </Text>
+                  <Text style={{ color: '#B5B5B5', fontSize: 12, paddingTop: 6 }}>Add photo</Text>
                 </View>
               ) : null}
             </ImageBackground>
@@ -119,9 +169,7 @@ export const TaskDetails = (task: any) => {
             onPress={addCompletedTask}
           >
             <View style={[styles.button, !image && { backgroundColor: '#EDEDED' }]}>
-              <Text style={[styles.buttonTitle, !image && { color: '#B5B5B5' }]}>
-                Zatwierdź zadanie
-              </Text>
+              <Text style={[styles.buttonTitle, !image && { color: '#B5B5B5' }]}>Check task</Text>
             </View>
           </TouchableOpacity>
         </View>

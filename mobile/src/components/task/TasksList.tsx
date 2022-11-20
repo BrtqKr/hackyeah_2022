@@ -4,13 +4,14 @@ import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { TaskNavigatorStackParamList } from '../../navigation/navigators/AppCoreNavigator/TasksNavigator/TaskNavigator';
 import { TaskStatus } from '../../navigation/navigators/AppCoreNavigator/TasksNavigator/types';
 import { sizeMap } from '../../theme/Iconography';
 import { ScreenWrapper } from '../shared';
 import { Colors } from '../../theme/Colors';
 import { Typography } from '../../theme/Typography/Typography';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { ApiResponse, TasksWithMetadata } from '../../axios/types';
+import { AppCoreStackParamList } from '../../navigation/navigators/AppCoreNavigator/AppCoreNavigator';
 
 interface MockImage {
   url: string;
@@ -44,7 +45,7 @@ const mockImages: MockImage[] = [
   },
 ];
 
-type Navigation = StackNavigationProp<TaskNavigatorStackParamList>;
+type Navigation = StackNavigationProp<AppCoreStackParamList>;
 
 type IconName = Pick<ComponentPropsWithoutRef<typeof Feather>, 'name'>;
 
@@ -69,12 +70,35 @@ const statusToImageStyle: Record<
   },
 };
 
-const Card = ({ index }: { index: number }) => {
-  const { url, status } = mockImages[index % mockImages.length];
-  const { backgroundColor, ...iconProps } = statusToImageStyle[status];
+type ArrayElement<ArrayType extends readonly unknown[]> =
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+
+const getStatus = (
+  item: ArrayElement<ApiResponse<TasksWithMetadata>['data']>
+): MockImage['status'] => {
+  if (item.attributes.task_completions.data.length !== 0) return 'completed';
+  const unixTimeZero = Date.parse(item.attributes.date_finished);
+  if (unixTimeZero < Date.now()) {
+    return 'failed';
+  }
+  return 'inProgress';
+};
+
+const Card = ({
+  index,
+  ...item
+}: { index: number } & ArrayElement<ApiResponse<TasksWithMetadata>['data']>) => {
+  const { url } = mockImages[index % mockImages.length];
+
+  const { backgroundColor, ...iconProps } = statusToImageStyle[getStatus(item)];
   const { navigate } = useNavigation<Navigation>();
+
+  const imageUrl = item.attributes.media.data?.attributes.url
+    ? 'http://188.68.236.47' + item.attributes.media.data?.attributes.url
+    : url;
+
   return (
-    <TouchableOpacity onPress={() => navigate('TaskDetailsRoute', { taskId: 'lol' })}>
+    <TouchableOpacity onPress={() => navigate('TaskDetailsRoute', { taskId: item.id })}>
       <View
         style={[
           styles.card,
@@ -92,7 +116,7 @@ const Card = ({ index }: { index: number }) => {
           <Image
             style={styles.image}
             source={{
-              uri: url,
+              uri: imageUrl,
             }}
           />
           <Feather
@@ -103,7 +127,7 @@ const Card = ({ index }: { index: number }) => {
         </View>
         <View style={styles.thumbnailContainer}>
           <View style={styles.thumbnail}>
-            <Text style={styles.thumbnailText}>Lorem ipsum doloret sit amet</Text>
+            <Text style={styles.thumbnailText}>{item.attributes.title}</Text>
           </View>
         </View>
       </View>
@@ -111,7 +135,7 @@ const Card = ({ index }: { index: number }) => {
   );
 };
 
-const TasksList = () => {
+const TasksList = ({ tasks }: { tasks: ApiResponse<TasksWithMetadata>['data'] }) => {
   const animationProgress = useSharedValue(0);
 
   useEffect(() => {
@@ -130,9 +154,9 @@ const TasksList = () => {
         <Text style={Typography.text1}>Your ongoing tasks</Text>
         <FlatList
           style={styles.flatList}
-          data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+          data={tasks}
           numColumns={2}
-          renderItem={({ index }) => <Card index={index} />}
+          renderItem={({ item, index }) => <Card index={index} {...item} />}
           columnWrapperStyle={styles.flatListColumn}
           contentContainerStyle={styles.flatListContainer}
         />

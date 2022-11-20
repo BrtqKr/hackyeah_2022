@@ -26,9 +26,10 @@ export type UserWithId = User & {
 
 export type TasksWithMetadata = Task & {
   task_completions: ApiResponse<
-      TaskCompletion & {
-    users_permissions_user: ApiSingularResponse<User>;
-  }>;
+    TaskCompletion & {
+      users_permissions_user: ApiSingularResponse<User>;
+    }
+  >;
   media: ApiSingularResponse<Media>;
 };
 
@@ -36,10 +37,10 @@ export type TaskCompletion = {
   date_completed: string;
   verified: boolean;
   users_permissions_user: ApiSingularResponse<User>;
-  task: ApiSingularResponse<Task>,
-  media: ApiSingularResponse<Media>,
-  comments: ApiResponse<any>
-  liked_by: ApiResponse<User>
+  task: ApiSingularResponse<Task>;
+  media: ApiSingularResponse<Media>;
+  comments: ApiResponse<any>;
+  liked_by: ApiResponse<User>;
 };
 
 export type Comment = {
