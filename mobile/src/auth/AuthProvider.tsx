@@ -1,5 +1,6 @@
 import { setItemAsync, deleteItemAsync, getItemAsync } from 'expo-secure-store';
 import React, { useContext, useState } from 'react';
+import { UserWithId } from '../axios/types';
 export const JWT_TOKEN_KEY = 'JWT_TOKEN';
 
 export const setAuthToken = (token: string) => {
@@ -16,6 +17,7 @@ export const deleteAuthToken = () => {
 
 function useAuth() {
   const [isSignedIn, setSignedIn] = useState<boolean>(false);
+  const [user, setUser] = useState<UserWithId>();
 
   const initialize = async () => {
     const getTokenRes = await getAuthToken();
@@ -25,8 +27,9 @@ function useAuth() {
     }
   };
 
-  const login = async (token: string) => {
+  const login = async (token: string, user: UserWithId) => {
     await setAuthToken(token);
+    setUser(user);
     setSignedIn(true);
   };
 
@@ -35,7 +38,7 @@ function useAuth() {
     setSignedIn(false);
   };
 
-  return { initialize, login, logout, isSignedIn };
+  return { initialize, login, logout, isSignedIn, user };
 }
 
 const AuthContext = React.createContext<ReturnType<typeof useAuth>>({

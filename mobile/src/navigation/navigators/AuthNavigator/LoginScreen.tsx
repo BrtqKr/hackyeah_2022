@@ -34,7 +34,7 @@ const LoginScreen = () => {
   const { mutate } = useMutation({
     mutationFn: loginUser,
     onSuccess: (loginResponse) => {
-      login(loginResponse.jwt);
+      login(loginResponse.jwt, loginResponse.user);
     },
   });
 
